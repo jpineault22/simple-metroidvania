@@ -1,7 +1,7 @@
 # simple-metroidvania
 Repository for a currently unnamed 2D metroidvania game.
 
-#### Controls
+### Controls
 |  | Controller | Keyboard |
 | - | :---: | :---: |
 | **Move** | Joystick/Dpad | Arrows/WASD |
@@ -15,11 +15,11 @@ Repository for a currently unnamed 2D metroidvania game.
 
 *Note: Controller not fully supported (especially in menus/UI)*
 
-#### Known bugs
+### Known bugs
 - The camera doesn't snap to the player when the first map is loaded after the menu (more apparent when loading from save file and spawning on saving spot).
 - When dashing through a map exit, the player gets stuck in a loop quickly transitioning back and forth between the two maps.
 
-#### Next things to implement
+### Next things to implement
 - Enemies and bosses (+cutscenes)
 - Player health system
 - Sound integration with Wwise
