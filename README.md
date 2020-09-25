@@ -17,6 +17,7 @@ Repository for a currently unnamed 2D metroidvania game.
 
 ### Known bugs
 - The camera doesn't snap to the player when the first map is loaded after the menu (more apparent when loading from save file and spawning on saving spot).
+- After a wall jump, the player can spam *Jump* and keep flying in diagonal
 - When dashing through a map exit, the player gets stuck in a loop quickly transitioning back and forth between the two maps.
 
 ### Next things to implement
