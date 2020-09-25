@@ -11,4 +11,9 @@ public class MainMenu : MonoBehaviour
 	{
 		GameManager.Instance.QuitGame();
 	}
+
+	public void DeleteSaveFile()
+	{
+		GameManager.Instance.DeleteSaveFile();
+	}
 }

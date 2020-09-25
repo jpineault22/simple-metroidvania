@@ -73,6 +73,11 @@ public class GameManager : Singleton<GameManager>
 		}
 	}
 
+	public void DeleteSaveFile()
+	{
+		SaveSystem.DeleteSaveFile();
+	}
+
 	public void StartGame(int pSaveSpotMapNumber)
 	{
 		CurrentGameState = GameState.Playing;

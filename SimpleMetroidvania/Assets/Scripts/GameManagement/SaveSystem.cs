@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using UnityEditor.PackageManager;
 
 public static class SaveSystem
 {
@@ -31,6 +32,19 @@ public static class SaveSystem
 		{
 			Debug.Log("[SaveSystem] Save file not found in " + savePath + ". Starting new game." );
 			return null;
+		}
+	}
+
+	public static void DeleteSaveFile()
+	{
+		if (File.Exists(@savePath))
+		{
+			File.Delete(@savePath);
+			Debug.Log("[SaveSystem] Save file deleted.");
+		}
+		else
+		{
+			Debug.Log("[SaveSystem] No save file found.");
 		}
 	}
 }
