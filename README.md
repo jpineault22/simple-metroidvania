@@ -24,3 +24,5 @@ Repository for a currently unnamed 2D metroidvania game.
 - Player health system
 - Sound integration with Wwise
 - Keybindings + full controller support (UI)
+- Various gameplay objects/elements
+- Real (non-test) maps
