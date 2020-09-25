@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: CharacterPlaceholderSpriteAtlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 0
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 2048
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 0
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 2
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: a30527fba7614f243ae16d0aafab8fbf, type: 3}
+    totalSpriteSurfaceArea: 5632
+    bindAsDefault: 1
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 590cf42330a9e424993ff7c51a36c8f3, type: 3}
+  - {fileID: 21300000, guid: f7fc54b495d604f4e8817aeb61267679, type: 3}
+  - {fileID: 21300000, guid: 0815bca50ea95c947b9008bb4521aef5, type: 3}
+  - {fileID: 21300000, guid: 0a2044c6406410140bf659db1b48347d, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - character-attack-down-placeholder
+  - character-attack-up-placeholder
+  - character-attack-placeholder
+  - character-placeholder
+  m_Tag: CharacterPlaceholderSpriteAtlas
+  m_IsVariant: 0
