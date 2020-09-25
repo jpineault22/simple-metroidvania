@@ -11,7 +11,7 @@ Repository for a currently unnamed 2D metroidvania game.
 | **\*Dash** | Right Trigger | L |
 | **\*Throw bomb** | Button East | Space |
 
-\*Collect powerup to acquire
+\*Collect powerup item to acquire ability
 
 *Note: Controller not fully supported (especially in menus/UI)*
 
