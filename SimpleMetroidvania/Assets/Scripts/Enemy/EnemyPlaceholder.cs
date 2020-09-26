@@ -7,4 +7,9 @@ public class EnemyPlaceholder : Enemy
 	{
 		throw new System.NotImplementedException();
 	}
+
+	protected override void Die()
+	{
+		throw new System.NotImplementedException();
+	}
 }

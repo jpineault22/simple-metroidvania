@@ -2,7 +2,7 @@
 
 public class PlayerController : Singleton<PlayerController>
 {
-    [HideInInspector] public CharacterState characterState;
+    public CharacterState CurrentCharacterState { get; private set; }
 
     #region Persistent variables
 
@@ -24,17 +24,17 @@ public class PlayerController : Singleton<PlayerController>
 	#region Game objects assignable in inspector
 
 	[Header("Game objects")]
-    [SerializeField] private Transform ceilingCheckLeft;
-    [SerializeField] private Transform ceilingCheckRight;
-    [SerializeField] private Transform wallCheckLeft;
-    [SerializeField] private Transform wallCheckRight;
-    [SerializeField] private LayerMask groundLayerMask;
-    [SerializeField] private Transform attackPointRight;
-    [SerializeField] private Transform attackPointLeft;
-    [SerializeField] private Transform attackPointUp;
-    [SerializeField] private Transform attackPointDown;
-    [SerializeField] private LayerMask enemyLayerMask;
-    [SerializeField] private GameObject bombPrefab;
+    [SerializeField] private Transform ceilingCheckLeft = default;
+    [SerializeField] private Transform ceilingCheckRight = default;
+    [SerializeField] private Transform wallCheckLeft = default;
+    [SerializeField] private Transform wallCheckRight = default;
+    [SerializeField] private LayerMask groundLayerMask = default;
+    [SerializeField] private Transform attackPointRight = default;
+    [SerializeField] private Transform attackPointLeft = default;
+    [SerializeField] private Transform attackPointUp = default;
+    [SerializeField] private Transform attackPointDown = default;
+    [SerializeField] private LayerMask enemyLayerMask = default;
+    [SerializeField] private GameObject bombPrefab = default;
 
     // Reference to the interactible game object in range
     private GameObject interactibleGameObject;
@@ -126,6 +126,7 @@ public class PlayerController : Singleton<PlayerController>
 	protected override void Awake()
     {
         base.Awake();
+        DontDestroyOnLoad(gameObject);
 
         // Getting components
         rb = GetComponent<Rigidbody2D>();
@@ -138,7 +139,7 @@ public class PlayerController : Singleton<PlayerController>
         controls.Gameplay.Jump.performed += ctx => StartJump();
         controls.Gameplay.Jump.canceled += ctx => EndJump();
         controls.Gameplay.Attack.performed += ctx => StartAttack();
-        controls.Gameplay.Interact.performed += ctx => Interact();
+        controls.Gameplay.Interact.performed += ctx => StartInteraction();
         controls.Gameplay.Dash.performed += ctx => StartDash();
         controls.Gameplay.Bomb.performed += ctx => StartBomb();
         controls.Gameplay.Direction.performed += ctx => DetermineDirection(ctx.ReadValue<Vector2>());
@@ -175,15 +176,15 @@ public class PlayerController : Singleton<PlayerController>
 	{
         if (GameManager.Instance.CurrentGameState == GameState.Playing)
 		{
-            if (characterState == CharacterState.MapTransition)
+            if (CurrentCharacterState == CharacterState.MapTransition)
             {
                 ProcessMapTransition();
             }
-            else if (characterState == CharacterState.Dashing)
+            else if (CurrentCharacterState == CharacterState.Dashing)
             {
                 ProcessDash();
             }
-            else if (characterState == CharacterState.WallJumping)
+            else if (CurrentCharacterState == CharacterState.WallJumping)
             {
                 ProcessWallJump();
             }
@@ -194,7 +195,8 @@ public class PlayerController : Singleton<PlayerController>
 
                 Vector3 originLeft = new Vector3(boxCollider.bounds.center.x - boxCollider.bounds.extents.x, boxCollider.bounds.center.y, boxCollider.bounds.center.z);
                 Vector3 originRight = new Vector3(boxCollider.bounds.center.x + boxCollider.bounds.extents.x, boxCollider.bounds.center.y, boxCollider.bounds.center.z);
-                isGrounded = Physics2D.Raycast(originLeft, Vector2.down, boxCollider.bounds.extents.y + groundedRadius, groundLayerMask) || Physics2D.Raycast(originRight, Vector2.down, boxCollider.bounds.extents.y + groundedRadius, groundLayerMask);
+                isGrounded = Physics2D.Raycast(originLeft, Vector2.down, boxCollider.bounds.extents.y + groundedRadius, groundLayerMask) 
+                    || Physics2D.Raycast(originRight, Vector2.down, boxCollider.bounds.extents.y + groundedRadius, groundLayerMask);
 
                 // Reset dashes
                 if (isGrounded)
@@ -202,7 +204,7 @@ public class PlayerController : Singleton<PlayerController>
                     numberOfDashes = maxNumberOfDashes;
                 }
 
-                if (characterState == CharacterState.Jumping)
+                if (CurrentCharacterState == CharacterState.Jumping)
                 {
                     ProcessJump();
                 }
@@ -232,117 +234,132 @@ public class PlayerController : Singleton<PlayerController>
 
     private void StartJump()
 	{
-        if (isGrounded)
+        if (GameManager.Instance.CurrentGameState == GameState.Playing && CurrentCharacterState != CharacterState.MapTransition)
 		{
-            characterState = CharacterState.Jumping;
-            jumpTimeCounter = jumpTime;
-		}
-        else if (HasWallJump && horizontalSpeedMultiplier != 0)
-		{
-            characterState = CharacterState.WallJumping;
-            wallJumpTimeCounter = wallJumpTime;
+            if (isGrounded)
+            {
+                CurrentCharacterState = CharacterState.Jumping;
+                jumpTimeCounter = jumpTime;
+            }
+            else if (HasWallJump && (CurrentCharacterState == CharacterState.Jumping || CurrentCharacterState == CharacterState.Falling) && horizontalSpeedMultiplier != 0)
+            {
+                CurrentCharacterState = CharacterState.WallJumping;
+                wallJumpTimeCounter = wallJumpTime;
+            }
         }
 	}
 
     private void EndJump()
 	{
-        if (characterState == CharacterState.Jumping)
+        if (CurrentCharacterState == CharacterState.Jumping)
 		{
-            characterState = CharacterState.Falling;
+            CurrentCharacterState = CharacterState.Falling;
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y / incompleteJumpFallVelocityDivider);
         }
     }
 
     private void StartAttack()
 	{
-        if (Time.time >= nextAttackTime)
-		{
-            nextAttackTime = Time.time + 1f / attackRate;
-
-            switch (attackDirection)
-			{
-                case Direction.Up:
-                    animator.SetTrigger(Constants.AnimatorPlayerAttackUp);
-                    break;
-                case Direction.Down:
-                    animator.SetTrigger(Constants.AnimatorPlayerAttackDown);
-                    break;
-                default:
-                    animator.SetTrigger(Constants.AnimatorPlayerAttack);
-                    break;
-			}
-
-            Vector2 attackPoint = facingRight ? attackPointRight.position : attackPointLeft.position;
-
-            if (attackDirection == Direction.Up)
+        if (GameManager.Instance.CurrentGameState == GameState.Playing && CurrentCharacterState != CharacterState.MapTransition)
+        {
+            if (Time.time >= nextAttackTime)
             {
-                attackPoint = attackPointUp.position;
-            }
-            else if (attackDirection == Direction.Down)
-            {
-                attackPoint = attackPointDown.position;
-            }
+                nextAttackTime = Time.time + 1f / attackRate;
 
-            Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint, attackRange, enemyLayerMask);
+                switch (attackDirection)
+                {
+                    case Direction.Up:
+                        animator.SetTrigger(Constants.AnimatorPlayerAttackUp);
+                        break;
+                    case Direction.Down:
+                        animator.SetTrigger(Constants.AnimatorPlayerAttackDown);
+                        break;
+                    default:
+                        animator.SetTrigger(Constants.AnimatorPlayerAttack);
+                        break;
+                }
 
-            if (hitEnemies.Length != 0)
-            {
-                recoilTimeCounter = recoilTime;
-            }
+                Vector2 attackPoint = facingRight ? attackPointRight.position : attackPointLeft.position;
 
-            foreach (Collider2D enemy in hitEnemies)
-            {
-                Debug.Log("Player hit " + enemy.name);
-                // Implement enemy damage
+                if (attackDirection == Direction.Up)
+                {
+                    attackPoint = attackPointUp.position;
+                }
+                else if (attackDirection == Direction.Down)
+                {
+                    attackPoint = attackPointDown.position;
+                }
+
+                Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint, attackRange, enemyLayerMask);
+
+                if (hitEnemies.Length != 0)
+                {
+                    recoilTimeCounter = recoilTime;
+                }
+
+                foreach (Collider2D enemy in hitEnemies)
+                {
+                    Debug.Log("Player hit " + enemy.name);
+                    // Implement enemy damage
+                }
             }
         }
 	}
 
-    private void Interact()
+    private void StartInteraction()
 	{
-        if (interactibleGameObject != null)
-		{
-            InteractibleObject interactibleObject = interactibleGameObject.GetComponent<InteractibleObject>();
-            interactibleObject.Interact();
-		}
+        if (GameManager.Instance.CurrentGameState == GameState.Playing && CurrentCharacterState != CharacterState.MapTransition)
+        {
+            if (interactibleGameObject != null)
+            {
+                InteractibleObject interactibleObject = interactibleGameObject.GetComponent<InteractibleObject>();
+                interactibleObject.Interact();
+            }
+        }
 	}
 
     private void StartDash()
 	{
-        if (HasDash && Time.time >= nextDashTime && characterState != CharacterState.Dashing)
+        if (GameManager.Instance.CurrentGameState == GameState.Playing && CurrentCharacterState != CharacterState.MapTransition)
         {
-            if (numberOfDashes != 0)
-			{
-                nextDashTime = Time.time + 1f / dashRate;
-                dashTimeCounter = dashTime;
-                characterState = CharacterState.Dashing;
-                numberOfDashes--;
-			}
+            if (HasDash && Time.time >= nextDashTime && CurrentCharacterState != CharacterState.Dashing)
+            {
+                if (numberOfDashes != 0)
+                {
+                    nextDashTime = Time.time + 1f / dashRate;
+                    dashTimeCounter = dashTime;
+                    CurrentCharacterState = CharacterState.Dashing;
+                    numberOfDashes--;
+                }
+            }
         }
     }
 
     private void StartBomb()
 	{
-        if (HasBomb && Time.time >= nextBombTime)
-		{
-            nextBombTime = Time.time + Bomb.MaxLifetime;
-            
-            Transform spawnPoint;
-            float velocityX;
-
-            if (facingRight)
+        if (GameManager.Instance.CurrentGameState == GameState.Playing && CurrentCharacterState != CharacterState.MapTransition)
+        {
+            if (HasBomb && Time.time >= nextBombTime)
             {
-                spawnPoint = attackPointRight.transform;
-                velocityX = bombVelocityX;
-            }
-            else
-            {
-                spawnPoint = attackPointLeft.transform;
-                velocityX = -bombVelocityX;
-            }
+                nextBombTime = Time.time + Bomb.MaxLifetime;
 
-            GameObject spawnedBomb = Instantiate(bombPrefab, spawnPoint);
-            spawnedBomb.GetComponent<Rigidbody2D>().velocity = new Vector2(velocityX, bombVelocityY);
+                Transform spawnPoint;
+                float velocityX;
+
+                if (facingRight)
+                {
+                    spawnPoint = attackPointRight.transform;
+                    velocityX = bombVelocityX;
+                }
+                else
+                {
+                    spawnPoint = attackPointLeft.transform;
+                    velocityX = -bombVelocityX;
+                }
+
+                GameObject spawnedBomb = Instantiate(bombPrefab, spawnPoint);
+                spawnedBomb.GetComponent<Rigidbody2D>().velocity = new Vector2(velocityX, bombVelocityY);
+            }
         }
 	}
 
@@ -375,19 +392,14 @@ public class PlayerController : Singleton<PlayerController>
                 int direction = facingRight ? 1 : -1;
                 rb.velocity = new Vector2(direction * speed, rb.velocity.y);
 
-                if (isGrounded && characterState != CharacterState.Jumping)
+                if (isGrounded && CurrentCharacterState != CharacterState.Jumping)
                 {
-                    characterState = CharacterState.Running;
+                    CurrentCharacterState = CharacterState.Running;
                 }
             }
             else
             {
-                rb.velocity = new Vector2(0, rb.velocity.y);
-
-                if (isGrounded && characterState != CharacterState.Jumping)
-                {
-                    characterState = CharacterState.Idle;
-                }
+                StopMovement();
             }
         }
 	}
@@ -398,7 +410,7 @@ public class PlayerController : Singleton<PlayerController>
         if (Physics2D.OverlapCircle(ceilingCheckLeft.position, bunkRadius, groundLayerMask) || Physics2D.OverlapCircle(ceilingCheckRight.position, bunkRadius, groundLayerMask))
         {
             rb.velocity = new Vector2(rb.velocity.x, 0);
-            characterState = CharacterState.Falling;
+            CurrentCharacterState = CharacterState.Falling;
         }
         else if (jumpTimeCounter > 0)
         {
@@ -407,7 +419,7 @@ public class PlayerController : Singleton<PlayerController>
         }
         else
         {
-            characterState = CharacterState.Falling;
+            CurrentCharacterState = CharacterState.Falling;
         }
     }
 
@@ -420,7 +432,7 @@ public class PlayerController : Singleton<PlayerController>
         }
         else
         {
-            characterState = CharacterState.Falling;
+            CurrentCharacterState = CharacterState.Falling;
             horizontalSpeedMultiplier = 0;
         }
     }
@@ -438,7 +450,7 @@ public class PlayerController : Singleton<PlayerController>
 		else
 		{
 			rb.velocity = Vector2.zero;
-			characterState = CharacterState.Falling;
+			CurrentCharacterState = CharacterState.Falling;
 		}
 	}
 
@@ -540,7 +552,7 @@ public class PlayerController : Singleton<PlayerController>
 
     private void CheckFlipX()
 	{
-        if (characterState == CharacterState.MapTransition)
+        if (CurrentCharacterState == CharacterState.MapTransition)
 		{
             if (mapTransitionDirection == MapTransitionDirection.Right)
 			{
@@ -571,7 +583,7 @@ public class PlayerController : Singleton<PlayerController>
     private void CheckWalls()
 	{
         // Check if there are walls to the sides and set the horizontal speed multiplier that will determine the direction of the wall jump
-        if ((characterState == CharacterState.Falling || characterState == CharacterState.Jumping) && !isGrounded)
+        if ((CurrentCharacterState == CharacterState.Falling || CurrentCharacterState == CharacterState.Jumping) && !isGrounded)
 		{
             if (Physics2D.OverlapCircle(wallCheckLeft.position, groundedRadius, groundLayerMask))
             {
@@ -586,7 +598,7 @@ public class PlayerController : Singleton<PlayerController>
                 horizontalSpeedMultiplier = 0;
             }
         }
-        else if (characterState != CharacterState.WallJumping)
+        else if (CurrentCharacterState != CharacterState.WallJumping)
 		{
             horizontalSpeedMultiplier = 0;
 		}
@@ -594,9 +606,9 @@ public class PlayerController : Singleton<PlayerController>
 
     private void CheckIfFalling()
 	{
-        if (characterState != CharacterState.Jumping && !isGrounded)
+        if (CurrentCharacterState != CharacterState.Jumping && !isGrounded && CurrentCharacterState != CharacterState.MapTransition)
 		{
-            characterState = CharacterState.Falling;
+            CurrentCharacterState = CharacterState.Falling;
 		}
 	}
 
@@ -699,23 +711,33 @@ public class PlayerController : Singleton<PlayerController>
 
 	#region Methods called by external objects
 
-	public bool IsMapTransitioning()
+	public void SetStateToMapTransition(MapTransitionDirection pMapTransitionDirection, int pTargetMapExitNumber)
 	{
-        return characterState == CharacterState.MapTransition;
-	}
-
-    public void SetStateToMapTransition(MapTransitionDirection pMapTransitionDirection, int pTargetMapExitNumber)
-	{
-        characterState = CharacterState.MapTransition;
+        CurrentCharacterState = CharacterState.MapTransition;
         mapTransitionDirection = pMapTransitionDirection;
         targetMapExitNumber = pTargetMapExitNumber;
 	}
 
-	#endregion
+    public void SetStateToIdle()
+	{
+        CurrentCharacterState = CharacterState.Idle;
+	}
 
-	#region Event handlers
-	
-	private void OnTransitionHalfDone()
+    public void StopMovement()
+    {
+        rb.velocity = new Vector2(0, rb.velocity.y);
+
+        if (isGrounded && CurrentCharacterState != CharacterState.Jumping)
+        {
+            CurrentCharacterState = CharacterState.Idle;
+        }
+    }
+
+    #endregion
+
+    #region Event handlers
+
+    private void OnTransitionHalfDone()
 	{
         MoveToTargetMapExit();
         transitionHalfDone = true;
@@ -723,7 +745,7 @@ public class PlayerController : Singleton<PlayerController>
 
     private void OnMapTransitionEnded()
 	{
-        characterState = CharacterState.Idle;
+        CurrentCharacterState = CharacterState.Idle;
         transitionHalfDone = false;
         upTransitionHorizontalVelocity = 0;
         upTransitionVerticalVelocity = jumpForce;
@@ -757,6 +779,17 @@ public class PlayerController : Singleton<PlayerController>
 	}
 
 	#endregion
+
+	protected override void OnDestroy()
+	{
+        if (LevelLoader.IsInitialized)
+		{
+            LevelLoader.Instance.TransitionHalfDone -= OnTransitionHalfDone;
+            LevelLoader.Instance.MapTransitionEnded -= OnMapTransitionEnded;
+        }
+		
+        base.OnDestroy();
+    }
 }
 
 public enum CharacterState
@@ -769,8 +802,7 @@ public enum CharacterState
     WallJumping,
     Dashing,
     Hit,                // Not implemented
-    MapTransition,      // Consider implementing the map transition state as a GameState instead
-    Cutscene            // Not implemented
+    MapTransition       // Consider implementing as a GameState instead
 }
 
 public enum Direction

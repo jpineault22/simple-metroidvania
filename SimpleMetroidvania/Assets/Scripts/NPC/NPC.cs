@@ -2,7 +2,7 @@
 
 public class NPC : InteractibleObject
 {
-	[SerializeField] private string npcName;
+	[SerializeField] private string npcName = default;
 	
 	private DialogueTrigger dialogueTrigger;
 

@@ -5,8 +5,8 @@ using UnityEngine.Audio;
 
 public class SettingsMenu : MonoBehaviour
 {
-	[SerializeField] private TMP_Dropdown resolutionDropDown;
-	[SerializeField] private AudioMixer mainMixer;
+	[SerializeField] private TMP_Dropdown resolutionDropDown = default;
+	[SerializeField] private AudioMixer mainMixer = default;
 
 	private Resolution[] resolutions;
 

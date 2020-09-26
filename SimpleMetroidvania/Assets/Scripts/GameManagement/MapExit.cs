@@ -2,9 +2,9 @@
 
 public class MapExit : MonoBehaviour
 {
-    [SerializeField] private int targetSceneNumber;
-    [SerializeField] private int targetMapExitNumber;
-	[SerializeField] private MapTransitionDirection mapTransitionDirection;
+    [SerializeField] private int targetSceneNumber = default;
+    [SerializeField] private int targetMapExitNumber = default;
+	[SerializeField] private MapTransitionDirection mapTransitionDirection = default;
 
     public int GetTargetSceneNumber()
 	{
@@ -26,10 +26,9 @@ public class MapExit : MonoBehaviour
 	{
 		if (pCollision.gameObject.CompareTag(Constants.TagPlayer))
 		{
-			PlayerController playerController = pCollision.gameObject.GetComponent<PlayerController>();
-			if (!playerController.IsMapTransitioning())
+			if (PlayerController.Instance.CurrentCharacterState != CharacterState.MapTransition)
 			{
-				playerController.SetStateToMapTransition(mapTransitionDirection, targetMapExitNumber);
+				PlayerController.Instance.SetStateToMapTransition(mapTransitionDirection, targetMapExitNumber);
 				GameManager.Instance.LoadMap(this);
 			}
 		}

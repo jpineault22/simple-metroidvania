@@ -2,7 +2,7 @@
 
 public class PauseMenu : MonoBehaviour
 {
-    [SerializeField] private GameObject pauseMenuPanel;
+    [SerializeField] private GameObject pauseMenuPanel = default;
 
 	// Create a UIManager class to gather the input when you'll have multiple menus (inventory, map, etc.)
 	private UIControls controls;
@@ -29,7 +29,7 @@ public class PauseMenu : MonoBehaviour
 		{
 			Resume();
 		}
-		else if (GameManager.Instance.CurrentGameState == GameState.Playing && PlayerController.Instance.characterState != CharacterState.MapTransition)
+		else if (GameManager.Instance.CurrentGameState == GameState.Playing && PlayerController.Instance.CurrentCharacterState != CharacterState.MapTransition)
 		{
 			Pause();
 		}

@@ -5,8 +5,8 @@ public class Bomb : MonoBehaviour
 	// Serves as a maximum life time in seconds as well as a cooldown used in PlayerController
 	public static float MaxLifetime { get; set; } = 2f;
 
-	[SerializeField] private LayerMask bombableGroundLayerMask;
-	[SerializeField] private LayerMask enemyLayerMask;
+	[SerializeField] private LayerMask bombableGroundLayerMask = default;
+	[SerializeField] private LayerMask enemyLayerMask = default;
 	[SerializeField] private float bombRange = 3f;
 
 	private float lifetime;

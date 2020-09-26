@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class DialogueManager : Singleton<DialogueManager>
 {
-    [SerializeField] private TMP_Text nameText;
-    [SerializeField] private TMP_Text dialogueText;
-    [SerializeField] private Animator animator;
+    [SerializeField] private TMP_Text nameText = default;
+    [SerializeField] private TMP_Text dialogueText = default;
+    [SerializeField] private Animator animator = default;
     
     private Queue<string> sentences;
     private string currentSentence;
@@ -24,8 +24,10 @@ public class DialogueManager : Singleton<DialogueManager>
 
     public void StartDialogue(string pNpcName, Dialogue pDialogue)
 	{
+        GameManager.Instance.StartDialogueState();
         dialogueActive = true;
         animator.SetBool(Constants.AnimatorDialogueIsOpen, true);
+
         nameText.text = pNpcName;
         sentences.Clear();
 
@@ -77,5 +79,6 @@ public class DialogueManager : Singleton<DialogueManager>
 	{
         animator.SetBool(Constants.AnimatorDialogueIsOpen, false);
         dialogueActive = false;
+        GameManager.Instance.EndDialogueState();
     }
 }

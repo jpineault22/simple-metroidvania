@@ -2,7 +2,7 @@
 
 public class DialogueTrigger : MonoBehaviour
 {
-    [SerializeField] private Dialogue[] dialogue;
+    [SerializeField] private Dialogue[] dialogue = default;
 
 	// Find a way to make this variable persist through scene changes
 	private int currentDialogueIndex;

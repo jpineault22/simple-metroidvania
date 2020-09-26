@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
-	[SerializeField] private GameObject[] systemPrefabs;			// Prefabs to instantiate when launching the game
-	[SerializeField] private GameObject playerPrefab;
-	[SerializeField] private GameObject dashPowerupPrefab;
-	[SerializeField] private GameObject wallJumpPowerupPrefab;
-	[SerializeField] private GameObject bombPowerupPrefab;
+	[SerializeField] private GameObject[] systemPrefabs = default;			// Prefabs to instantiate when launching the game
+	[SerializeField] private GameObject playerPrefab = default;
+	[SerializeField] private GameObject dashPowerupPrefab = default;
+	[SerializeField] private GameObject wallJumpPowerupPrefab = default;
+	[SerializeField] private GameObject bombPowerupPrefab = default;
 
 	public GameState CurrentGameState { get; private set; }
 	[HideInInspector] public GameObject player;
 
-	public event Action GameStarted;
+	public event Action MenuReloaded;
 	
 	private List<GameObject> instantiatedSystemPrefabs;
 	private Vector2? playerSavedPosition;
@@ -85,8 +85,6 @@ public class GameManager : Singleton<GameManager>
 		InstantiatePlayer();
 		LevelLoader.Instance.LoadFirstMap(Constants.NamePrefixSceneMap + pSaveSpotMapNumber);
 		LevelLoader.Instance.UnloadScene(Constants.NameSceneStartMenu);
-
-		GameStarted?.Invoke();
 	}
 
 	public void LoadMap(MapExit pMapExit)
@@ -111,6 +109,7 @@ public class GameManager : Singleton<GameManager>
 		LoadMenu();
 		DestroyPlayer();
 		LevelLoader.Instance.UnloadMapToMenu();
+		MenuReloaded?.Invoke();
 	}
 	
 	public void QuitGame()
@@ -163,6 +162,7 @@ public class GameManager : Singleton<GameManager>
 	private void DestroyPlayer()
 	{
 		Destroy(player);
+		player = null;
 	}
 
 	public void InstantiateDashPowerup(GameObject pSpawnPoint)
@@ -191,16 +191,31 @@ public class GameManager : Singleton<GameManager>
 
 	#endregion
 
+	#region State setting
+
+	public void StartDialogueState()
+	{
+		CurrentGameState = GameState.Dialogue;
+		PlayerController.Instance.StopMovement();
+	}
+
+	public void EndDialogueState()
+	{
+		CurrentGameState = GameState.Playing;
+	}
+
+	#endregion
+
 	protected override void OnDestroy()
 	{
-		base.OnDestroy();
-
 		for (int i = 0; i < instantiatedSystemPrefabs.Count; i++)
 		{
 			Destroy(instantiatedSystemPrefabs[i]);
 		}
 
 		instantiatedSystemPrefabs.Clear();
+		
+		base.OnDestroy();
 	}
 }
 
@@ -209,5 +224,6 @@ public enum GameState
 	Menu,
 	Playing,
 	Paused,
+	Dialogue,
 	Cutscene
 }

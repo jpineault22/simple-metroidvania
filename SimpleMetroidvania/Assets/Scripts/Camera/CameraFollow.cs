@@ -3,12 +3,12 @@
 // Old camera script, I am currently not using it and using Cinemachine instead
 public class CameraFollow : MonoBehaviour
 {
-	[SerializeField] private Transform target;
+	[SerializeField] private Transform target = default;
 	[SerializeField] private float smoothSpeed = 5f;
-	[SerializeField] private Vector3 offset;
+	[SerializeField] private Vector3 offset = default;
 
-	[SerializeField] private Vector2 minCameraPos;
-	[SerializeField] private Vector2 maxCameraPos;
+	[SerializeField] private Vector2 minCameraPos = default;
+	[SerializeField] private Vector2 maxCameraPos = default;
 
 	private void LateUpdate()
 	{

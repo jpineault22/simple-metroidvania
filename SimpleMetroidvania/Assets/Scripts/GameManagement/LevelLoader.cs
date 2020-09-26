@@ -5,22 +5,27 @@ using UnityEngine.SceneManagement;
 
 public class LevelLoader : Singleton<LevelLoader>
 {
-    [SerializeField] private Animator crossfadeAnimator;
-    [SerializeField] private float fadeTime = 1/3;    // Time for fade out/in, total transition animation time is twice that amount
+    [SerializeField] private Animator crossfadeAnimator = default;
+    [SerializeField] private float fadeTime = 1/3;                          // Time for fade out/in, total transition animation time is twice that amount
 
     public string CurrentMapName { get; private set; } = string.Empty;
     public GameObject CurrentFunctionalMap { get; private set; }
     public GameObject FirstPlayerSpawnPoint { get; private set; }
 
     public event Action FirstMapLoadCompleted;
-    public event Action TransitionHalfDone;                 // This event is invoked if the CrossfadeStart animation has ended AND the next map has been loaded
+    public event Action TransitionHalfDone;                                 // This event is invoked if the CrossfadeStart animation has ended AND the next map has been loaded
     public event Action MapTransitionEnded;
 
     private AsyncOperation currentMapLoadOperation;
     private string previousMapName = string.Empty;
     private bool crossfadeStartEnded;
 
-    private void Update()
+	private void Start()
+	{
+        DontDestroyOnLoad(gameObject);
+	}
+
+	private void Update()
 	{
 		if (crossfadeStartEnded && currentMapLoadOperation.isDone)
 		{

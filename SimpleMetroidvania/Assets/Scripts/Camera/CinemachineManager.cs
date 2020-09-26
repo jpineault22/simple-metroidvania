@@ -5,7 +5,6 @@ public class CinemachineManager : MonoBehaviour
 {
     private CinemachineVirtualCamera virtualCamera;
     private CinemachineConfiner confiner;
-	private GameObject player;
 
 	private void Awake()
 	{
@@ -15,54 +14,27 @@ public class CinemachineManager : MonoBehaviour
 
 	private void Start()
 	{
-		LevelLoader.Instance.FirstMapLoadCompleted += OnFirstLoadCompleted;
-		LevelLoader.Instance.TransitionHalfDone += OnTransitionHalfDone;
-		GameManager.Instance.GameStarted += OnGameStarted;
+		LevelLoader.Instance.FirstMapLoadCompleted += OnMapLoaded;
+		LevelLoader.Instance.TransitionHalfDone += OnMapLoaded;
+		GameManager.Instance.MenuReloaded += OnMenuReloaded;
 	}
 
 	#region Event handlers
 
-	private void OnGameStarted()
-	{
-		SetFollowPlayer();
-		virtualCamera.PreviousStateIsValid = false;
-		//transform.position = player.transform.position;
-	}
-
-	private void OnFirstLoadCompleted()
+	private void OnMapLoaded()
 	{
 		SetMapBoundariesConfiner();
+		SetFollowPlayer();
 	}
 
-	private void OnTransitionHalfDone()
+	private void OnMenuReloaded()
 	{
-		ResetCamera();
+		ResetVirtualCameraProperties();
 	}
 
 	#endregion
 
 	#region Setup
-
-	private void SetFollowPlayer()
-	{
-		player = GameManager.Instance.player;
-
-		if (player != null)
-		{
-			virtualCamera.Follow = player.transform;
-		}
-		else
-		{
-			Debug.LogError("[CinemachineManager] Couldn't find game object with tag [" + Constants.TagPlayer + "].");
-		}
-	}
-
-	private void ResetCamera()
-	{
-		SetMapBoundariesConfiner();
-		virtualCamera.PreviousStateIsValid = false;
-		//transform.position = player.transform.position;
-	}
 
 	private void SetMapBoundariesConfiner()
 	{
@@ -78,6 +50,26 @@ public class CinemachineManager : MonoBehaviour
 		{
 			Debug.LogError("[CinemachineManager] Couldn't find game object with tag [" + Constants.TagMapBoundaries + "].");
 		}
+	}
+
+	private void SetFollowPlayer()
+	{
+		if (GameManager.Instance.player != null)
+		{
+			transform.position = GameManager.Instance.player.transform.position;
+			virtualCamera.Follow = GameManager.Instance.player.transform;
+		}
+		else
+		{
+			Debug.LogError("[CinemachineManager] Couldn't find game object with tag [" + Constants.TagPlayer + "].");
+		}
+	}
+
+	private void ResetVirtualCameraProperties()
+	{
+		// It works, but check warnings on virtual camera component at runtime
+		confiner.m_BoundingShape2D = null;
+		virtualCamera.Follow = null;
 	}
 
 	#endregion

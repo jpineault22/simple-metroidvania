@@ -3,7 +3,7 @@
 // This class defines objects that have a trigger collider displaying a short message when in range, and with which the player can interact (such as NPCs, save spots and objects to pick up)
 public abstract class InteractibleObject : MonoBehaviour
 {
-    [SerializeField] private GameObject interactMessageCanvas;
+    [SerializeField] private GameObject interactMessageCanvas = default;
 
 	public bool InRange { get; private set; }
 
