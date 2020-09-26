@@ -56,6 +56,7 @@ public class CinemachineManager : MonoBehaviour
 	{
 		if (GameManager.Instance.player != null)
 		{
+			virtualCamera.PreviousStateIsValid = false;
 			transform.position = GameManager.Instance.player.transform.position;
 			virtualCamera.Follow = GameManager.Instance.player.transform;
 		}

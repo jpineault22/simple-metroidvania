@@ -51,6 +51,12 @@ public class LevelLoader : Singleton<LevelLoader>
         StartCoroutine(CrossfadeStartTransition());
     }
 
+	private void LoadMap(string pSceneName)
+	{
+        CurrentMapName = pSceneName;
+        currentMapLoadOperation = LoadScene(pSceneName);
+    }
+
     public void UnloadMapToMenu()
 	{
         if (CurrentMapName != string.Empty)
@@ -63,12 +69,6 @@ public class LevelLoader : Singleton<LevelLoader>
             Debug.LogError("[LevelLoader] Current map not set, cannot unload scene.");
 		}
 	}
-
-	private void LoadMap(string pSceneName)
-	{
-        CurrentMapName = pSceneName;
-        currentMapLoadOperation = LoadScene(pSceneName);
-    }
 
     public AsyncOperation LoadScene(string pSceneName)
 	{
