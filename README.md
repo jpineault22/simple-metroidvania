@@ -19,9 +19,10 @@ Repository for a currently unnamed 2D metroidvania game.
 - None at the moment
 
 ### Next things to implement
-- Enemies and bosses (+cutscenes)
+- Enemies
 - Player health system
-- Sound integration with Wwise
 - Keybindings + full controller support (UI)
+- Sound integration with Wwise
 - Various gameplay objects/elements
+- Implement some more Cinemachine functionalities
 - Real (non-test) maps
