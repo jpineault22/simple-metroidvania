@@ -16,7 +16,7 @@ Repository for a currently unnamed 2D metroidvania game.
 *Note: Controller not fully supported (especially in menus/UI)*
 
 ### Known bugs
-- None at the moment
+- When standing on a unit-wide ground, the player is too large and both ground checks do not detect the ground, making it impossible to jump. (When I start creating real maps, the ground will likely always be at least as wide as the player, so this shouldn't matter. If I decide otherwise, I will have to fix this.)
 
 ### Next things to implement
 - Enemies
