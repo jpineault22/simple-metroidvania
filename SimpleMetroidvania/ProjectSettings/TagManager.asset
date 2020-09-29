@@ -17,6 +17,10 @@ TagManager:
   - DashPowerupSpawnPoint
   - WallJumpPowerupSpawnPoint
   - BombPowerupSpawnPoint
+  - Heart
+  - Enemy
+  - HeartSpawnPoint
+  - Enemy-placeholderSpawnPoint
   layers:
   - Default
   - TransparentFX
@@ -32,7 +36,7 @@ TagManager:
   - PassthroughObjects
   - BombableGround
   - InteractibleObject
-  - 
+  - FunctionalEnemy
   - 
   - 
   - 

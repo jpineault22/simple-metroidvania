@@ -5,10 +5,6 @@ using UnityEngine;
 public class GameManager : Singleton<GameManager>
 {
 	[SerializeField] private GameObject[] systemPrefabs = default;			// Prefabs to instantiate when launching the game
-	[SerializeField] private GameObject playerPrefab = default;
-	[SerializeField] private GameObject dashPowerupPrefab = default;
-	[SerializeField] private GameObject wallJumpPowerupPrefab = default;
-	[SerializeField] private GameObject bombPowerupPrefab = default;
 
 	public GameState CurrentGameState { get; private set; }
 	[HideInInspector] public GameObject player;
@@ -16,7 +12,6 @@ public class GameManager : Singleton<GameManager>
 	public event Action MenuReloaded;
 	
 	private List<GameObject> instantiatedSystemPrefabs;
-	private Vector2? playerSavedPosition;
 
 	private void Start()
 	{
@@ -45,7 +40,8 @@ public class GameManager : Singleton<GameManager>
 			PlayerController.Instance.HasWallJump,
 			PlayerController.Instance.HasBomb,
 			PlayerHealth.Instance.CurrentHP,
-			PlayerHealth.Instance.MaxHP);
+			PlayerHealth.Instance.MaxHP,
+			PlayerController.Instance.AttackDamage);
 
 		SaveSystem.SavePlayerData(data);
 	}
@@ -58,7 +54,7 @@ public class GameManager : Singleton<GameManager>
 		if (data != null)
 		{
 			saveSpotMapNumber = data.SaveSpotMapNumber;
-			playerSavedPosition = new Vector2(data.SaveSpotPositionX, data.SaveSpotPositionY);
+			Spawner.Instance.PlayerSavedPosition = new Vector2(data.SaveSpotPositionX, data.SaveSpotPositionY);
 		}
 
 		StartGame(saveSpotMapNumber);
@@ -68,8 +64,8 @@ public class GameManager : Singleton<GameManager>
 			PlayerController.Instance.HasDash = data.HasDash;
 			PlayerController.Instance.HasWallJump = data.HasWallJump;
 			PlayerController.Instance.HasBomb = data.HasBomb;
-			PlayerHealth.Instance.CurrentHP = data.CurrentHP;
-			PlayerHealth.Instance.MaxHP = data.MaxHP;
+			PlayerHealth.Instance.LoadHP(data.CurrentHP, data.MaxHP);
+			PlayerController.Instance.AttackDamage = data.AttackDamage;
 		}
 	}
 
@@ -129,16 +125,8 @@ public class GameManager : Singleton<GameManager>
 
 	private void SetPlayerPosition()
 	{
-		if (playerSavedPosition.HasValue)
-		{
-			player.transform.position = new Vector3(playerSavedPosition.Value.x, playerSavedPosition.Value.y, player.transform.position.z);
-			playerSavedPosition = null;
-		}
-		else
-		{
-			Vector3 firstPlayerSpawnPointPosition = LevelLoader.Instance.FirstPlayerSpawnPoint.transform.position;
-			player.transform.position = new Vector3(firstPlayerSpawnPointPosition.x, firstPlayerSpawnPointPosition.y, player.transform.position.z);
-		}
+		Vector2 playerPosition = Spawner.Instance.GetPlayerPosition();
+		player.transform.position = new Vector3(playerPosition.x, playerPosition.y, player.transform.position.z);
 	}
 
 	#endregion
@@ -156,37 +144,13 @@ public class GameManager : Singleton<GameManager>
 
 	private void InstantiatePlayer()
 	{
-		player = Instantiate(playerPrefab);
+		player = Spawner.Instance.InstantiatePlayer();
 	}
 
 	private void DestroyPlayer()
 	{
-		Destroy(player);
+		Spawner.Instance.DestroyPlayer(player);
 		player = null;
-	}
-
-	public void InstantiateDashPowerup(GameObject pSpawnPoint)
-	{
-		if (!PlayerController.Instance.HasDash)
-		{
-			Instantiate(dashPowerupPrefab, pSpawnPoint.transform);
-		}
-	}
-
-	public void InstantiateWallJumpPowerup(GameObject pSpawnPoint)
-	{
-		if (!PlayerController.Instance.HasWallJump)
-		{
-			Instantiate(wallJumpPowerupPrefab, pSpawnPoint.transform);
-		}
-	}
-
-	public void InstantiateBombPowerup(GameObject pSpawnPoint)
-	{
-		if (!PlayerController.Instance.HasBomb)
-		{
-			Instantiate(bombPowerupPrefab, pSpawnPoint.transform);
-		}
 	}
 
 	#endregion

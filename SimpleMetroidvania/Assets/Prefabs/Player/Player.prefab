@@ -164,7 +164,6 @@ GameObject:
   - component: {fileID: 7327605479759152408}
   - component: {fileID: 7327605479759152407}
   - component: {fileID: 7327605479759152406}
-  - component: {fileID: 931269634859088283}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -316,7 +315,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfde45f3e6b15874fb4f748c174502d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterState: 0
+  boxCollider: {fileID: 0}
   ceilingCheckLeft: {fileID: 7327605480610513588}
   ceilingCheckRight: {fileID: 7327605479854605849}
   wallCheckLeft: {fileID: 7327605479390383677}
@@ -340,8 +339,8 @@ MonoBehaviour:
   bunkRadius: 0.1
   groundedRadius: 0.2
   minVerticalVelocity: -50
-  incompleteJumpFallVelocityFactor: 2
-  attackPointPosition: 1.75
+  incompleteJumpFallVelocityDivider: 2
+  baseAttackDamage: 1
   attackRange: 0.75
   attackRate: 3
   recoilTime: 0.1
@@ -357,18 +356,9 @@ MonoBehaviour:
   bombVelocityY: 20
   upTransitionHorizontalVelocityIncrement: 60
   upTransitionVerticalVelocityDecrement: 15
---- !u!114 &931269634859088283
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7327605479759152413}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24864b98395d9e94487888e3df3107a8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  hitForce: {x: 15, y: 10}
+  knockbackTime: 0.3
+  damageBoostTime: 2
 --- !u!1 &7327605479854605848
 GameObject:
   m_ObjectHideFlags: 0

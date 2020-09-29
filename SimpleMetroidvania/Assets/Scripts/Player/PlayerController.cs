@@ -9,13 +9,14 @@ public class PlayerController : Singleton<PlayerController>
     public bool HasDash { get; set; }
     public bool HasWallJump { get; set; }
     public bool HasBomb { get; set; }
+    public int AttackDamage { get; set; }
 
     #endregion
 
 	#region Components
 
+    public BoxCollider2D boxCollider;
 	private Rigidbody2D rb;
-    private BoxCollider2D boxCollider;
     private SpriteRenderer spriteRenderer;
     private Animator animator;
 
@@ -23,7 +24,7 @@ public class PlayerController : Singleton<PlayerController>
 
 	#region Game objects assignable in inspector
 
-	[Header("Game objects")]
+	[Header("Game objects/Layer masks")]
     [SerializeField] private Transform ceilingCheckLeft = default;
     [SerializeField] private Transform ceilingCheckRight = default;
     [SerializeField] private Transform wallCheckLeft = default;
@@ -54,6 +55,7 @@ public class PlayerController : Singleton<PlayerController>
     [SerializeField] private float incompleteJumpFallVelocityDivider = 2f;      // When cancelling jump, divide current vertical velocity by this number
 
     [Header("Attack settings")]
+    [SerializeField] private int baseAttackDamage = 1;
     //[SerializeField] private float attackPointPosition = 1.75f;
     [SerializeField] private float attackRange = 0.75f;
     [SerializeField] private float attackRate = 3f;                             // Times per second
@@ -80,9 +82,14 @@ public class PlayerController : Singleton<PlayerController>
     [SerializeField] private float upTransitionHorizontalVelocityIncrement = 60f;
     [SerializeField] private float upTransitionVerticalVelocityDecrement = 15f;
 
-	#endregion
+    [Header("Hit/Damage Boosting settings")]
+    [SerializeField] private Vector2 hitForce = new Vector2(15f, 10f);
+    [SerializeField] private float knockbackTime = 0.3f;                        // Duration of the knockback (Hit state, player does not have control)
+    [SerializeField] private float damageBoostTime = 2f;                        // Duration of the Hit state (Other states, player has control)
 
-	#region State variables
+    #endregion
+
+    #region State variables
 
     // Input
     private PlayerControls controls;
@@ -118,6 +125,11 @@ public class PlayerController : Singleton<PlayerController>
     private float upTransitionHorizontalVelocity;
     private float upTransitionVerticalVelocity;
 
+    // Hit/Damage Boosting
+    private float hitCounter;
+    private int hitDirection;
+    private bool damageBoosting;
+
 	#endregion
 
 
@@ -146,6 +158,7 @@ public class PlayerController : Singleton<PlayerController>
         controls.Gameplay.Direction.canceled += ctx => ResetDirection();
 
         // Setting initial variable values
+        AttackDamage = baseAttackDamage;
         facingRight = true;
         dashTimeCounter = dashTime;
         dashDirection = Direction.None;
@@ -158,17 +171,46 @@ public class PlayerController : Singleton<PlayerController>
 	{
         LevelLoader.Instance.TransitionHalfDone += OnTransitionHalfDone;
         LevelLoader.Instance.MapTransitionEnded += OnMapTransitionEnded;
-	}
+
+        PlayerHealth.Instance.SetHUBActive(true);
+    }
 
 	private void Update()
     {
         if (GameManager.Instance.CurrentGameState == GameState.Playing)
 		{
-            // Get horizontal movement input
-            moveInput = controls.Gameplay.Move.ReadValue<float>();
+            if (CurrentCharacterState == CharacterState.Hit)
+			{
+                if (hitCounter <= 0)
+				{
+                    CurrentCharacterState = CharacterState.Idle;
+                    damageBoosting = true;
+                    hitCounter = damageBoostTime;
+				}
 
-            CheckFlipX();
-            CheckWalls();
+                hitCounter -= Time.deltaTime;
+			}
+            else
+			{
+                if (damageBoosting)
+				{
+                    spriteRenderer.enabled = !spriteRenderer.enabled;
+
+                    if (hitCounter <= 0)
+                    {
+                        damageBoosting = false;
+                        spriteRenderer.enabled = true;
+                    }
+
+                    hitCounter -= Time.deltaTime;
+                }
+
+                // Get horizontal movement input
+                moveInput = controls.Gameplay.Move.ReadValue<float>();
+
+                CheckFlipX();
+                CheckWalls();
+            }
         }
     }
 
@@ -188,15 +230,11 @@ public class PlayerController : Singleton<PlayerController>
             {
                 ProcessWallJump();
             }
-            else
+            else if (CurrentCharacterState != CharacterState.Hit)
             {
                 CheckIfFalling();
                 MoveHorizontally();
-
-                Vector3 originLeft = new Vector3(boxCollider.bounds.center.x - boxCollider.bounds.extents.x, boxCollider.bounds.center.y, boxCollider.bounds.center.z);
-                Vector3 originRight = new Vector3(boxCollider.bounds.center.x + boxCollider.bounds.extents.x, boxCollider.bounds.center.y, boxCollider.bounds.center.z);
-                isGrounded = Physics2D.Raycast(originLeft, Vector2.down, boxCollider.bounds.extents.y + groundedRadius, groundLayerMask) 
-                    || Physics2D.Raycast(originRight, Vector2.down, boxCollider.bounds.extents.y + groundedRadius, groundLayerMask);
+                SetIsGrounded();
 
                 // Reset dashes
                 if (isGrounded)
@@ -297,10 +335,10 @@ public class PlayerController : Singleton<PlayerController>
                     recoilTimeCounter = recoilTime;
                 }
 
-                foreach (Collider2D enemy in hitEnemies)
+                foreach (Collider2D enemyCollider in hitEnemies)
                 {
-                    Debug.Log("Player hit " + enemy.name);
-                    // Implement enemy damage
+                    Enemy enemy = enemyCollider.gameObject.GetComponentInParent<Enemy>();
+                    enemy.GetHit(attackDirection, AttackDamage);
                 }
             }
         }
@@ -394,7 +432,7 @@ public class PlayerController : Singleton<PlayerController>
 
                 if (isGrounded && CurrentCharacterState != CharacterState.Jumping)
                 {
-                    CurrentCharacterState = CharacterState.Running;
+                    CurrentCharacterState = CharacterState.Walking;
                 }
             }
             else
@@ -524,9 +562,11 @@ public class PlayerController : Singleton<PlayerController>
             }
 
             // Determine attack direction
-            attackDirection = Direction.None;
-
-            if (Mathf.Abs(angleRad) > Constants.AngleConstant45 && Mathf.Abs(angleRad) < Constants.AngleConstant135)
+            if (Mathf.Abs(angleRad) <= Constants.AngleConstant45)
+			{
+                attackDirection = Direction.Right;
+			}
+            else if (Mathf.Abs(angleRad) < Constants.AngleConstant135)
 			{
                 if (angleRad > 0)
 				{
@@ -536,6 +576,10 @@ public class PlayerController : Singleton<PlayerController>
 				{
                     attackDirection = Direction.Down;
                 }
+            }
+            else
+			{
+                attackDirection = Direction.Left;
             }
         }
         else
@@ -547,7 +591,15 @@ public class PlayerController : Singleton<PlayerController>
     private void ResetDirection()
 	{
         dashDirection = Direction.None;
-        attackDirection = Direction.None;
+        attackDirection = facingRight ? Direction.Right : Direction.Left;
+    }
+
+    private void SetIsGrounded()
+	{
+        Vector3 originLeft = new Vector3(boxCollider.bounds.center.x - boxCollider.bounds.extents.x, boxCollider.bounds.center.y, boxCollider.bounds.center.z);
+        Vector3 originRight = new Vector3(boxCollider.bounds.center.x + boxCollider.bounds.extents.x, boxCollider.bounds.center.y, boxCollider.bounds.center.z);
+        isGrounded = Physics2D.Raycast(originLeft, Vector2.down, boxCollider.bounds.extents.y + groundedRadius, groundLayerMask)
+            || Physics2D.Raycast(originRight, Vector2.down, boxCollider.bounds.extents.y + groundedRadius, groundLayerMask);
     }
 
     private void CheckFlipX()
@@ -697,6 +749,23 @@ public class PlayerController : Singleton<PlayerController>
             HasBomb = true;
             CollectPowerup(pCollision.gameObject);
         }
+        // Check if heart and collect
+        else if (pCollision.gameObject.CompareTag(Constants.TagHeart))
+		{
+            PlayerHealth.Instance.IncrementHearts();
+            CollectPowerup(pCollision.gameObject);
+		}
+    }
+
+	private void OnTriggerStay2D(Collider2D pCollision)
+	{
+        // If the collision is an enemy and the character is not already hit or damage boosting, get hit
+        if (pCollision.gameObject.layer == LayerMask.NameToLayer(Constants.LayerFunctionalEnemy)
+            && CurrentCharacterState != CharacterState.Hit && !damageBoosting)
+		{
+            GetHit(pCollision.gameObject);
+		}
+
     }
 
 	private void OnTriggerExit2D(Collider2D pCollision)
@@ -706,6 +775,17 @@ public class PlayerController : Singleton<PlayerController>
             interactibleGameObject = null;
         }
     }
+
+    private void GetHit(GameObject pEnemyGameObject)
+	{
+        CurrentCharacterState = CharacterState.Hit;
+        Enemy enemy = pEnemyGameObject.GetComponentInParent<Enemy>();
+        PlayerHealth.Instance.TakeDamage(enemy.enemyData.attackDamage);
+
+        hitDirection = pEnemyGameObject.transform.position.x >= transform.position.x ? -1 : 1;
+        rb.velocity = new Vector2(hitDirection * hitForce.x, hitForce.y);
+        hitCounter = knockbackTime;
+	}
 
 	#endregion
 
@@ -782,6 +862,11 @@ public class PlayerController : Singleton<PlayerController>
 
 	protected override void OnDestroy()
 	{
+        if (PlayerHealth.IsInitialized)
+		{
+            PlayerHealth.Instance.SetHUBActive(false);
+        }
+        
         if (LevelLoader.IsInitialized)
 		{
             LevelLoader.Instance.TransitionHalfDone -= OnTransitionHalfDone;
@@ -795,13 +880,13 @@ public class PlayerController : Singleton<PlayerController>
 public enum CharacterState
 {
     Idle,
-    Running,
+    Walking,
     Jumping,
     Falling,
     WallSliding,        // Not implemented (for animation)
     WallJumping,
     Dashing,
-    Hit,                // Not implemented
+    Hit,
     MapTransition       // Consider implementing as a GameState instead
 }
 

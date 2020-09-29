@@ -10,7 +10,6 @@ public class LevelLoader : Singleton<LevelLoader>
 
     public string CurrentMapName { get; private set; } = string.Empty;
     public GameObject CurrentFunctionalMap { get; private set; }
-    public GameObject FirstPlayerSpawnPoint { get; private set; }
 
     public event Action FirstMapLoadCompleted;
     public event Action TransitionHalfDone;                                 // This event is invoked if the CrossfadeStart animation has ended AND the next map has been loaded
@@ -108,7 +107,7 @@ public class LevelLoader : Singleton<LevelLoader>
             GameObject[] gameObjects = currentMap.GetRootGameObjects();
 
             FindFunctionalMap(gameObjects);
-            FindSpawnPoints(gameObjects);
+            Spawner.Instance.FindSpawnPoints(gameObjects);
         }
     }
 
@@ -152,40 +151,6 @@ public class LevelLoader : Singleton<LevelLoader>
             if (obj.CompareTag(Constants.TagFunctionalMap))
             {
                 CurrentFunctionalMap = obj;
-            }
-        }
-    }
-
-    private void FindSpawnPoints(GameObject[] pGameObjects)
-	{
-        foreach (GameObject obj in pGameObjects)
-        {
-            if (obj.CompareTag(Constants.TagSpawnPoints))
-            {
-                GameObject[] spawnPoints = GameObjectUtils.GetChildren(obj);
-
-                foreach (GameObject spawnPoint in spawnPoints)
-				{
-                    // Retrieve initial player spawn point if in first map
-                    if (CurrentMapName == Constants.NamePrefixSceneMap + Constants.StartingMapNumber
-                    && spawnPoint.CompareTag(Constants.TagFirstPlayerSpawnPoint))
-                    {
-                        FirstPlayerSpawnPoint = obj;
-                    }
-                    // Retrieve powerup spawn points
-                    else if (spawnPoint.CompareTag(Constants.TagDashPowerupSpawnPoint))
-					{
-                        GameManager.Instance.InstantiateDashPowerup(spawnPoint);
-					}
-                    else if (spawnPoint.CompareTag(Constants.TagWallJumpPowerupSpawnPoint))
-					{
-                        GameManager.Instance.InstantiateWallJumpPowerup(spawnPoint);
-					}
-                    else if (spawnPoint.CompareTag(Constants.TagBombPowerupSpawnPoint))
-                    {
-                        GameManager.Instance.InstantiateBombPowerup(spawnPoint);
-                    }
-                }
             }
         }
     }

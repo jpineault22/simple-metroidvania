@@ -21,12 +21,19 @@ public static class Constants
 	public const string TagDashPowerupSpawnPoint = "DashPowerupSpawnPoint";
 	public const string TagWallJumpPowerupSpawnPoint = "WallJumpPowerupSpawnPoint";
 	public const string TagBombPowerupSpawnPoint = "BombPowerupSpawnPoint";
+	public const string TagHeartSpawnPoint = "HeartSpawnPoint";
+	public const string TagEnemyPlaceholderSpawnPoint = "Enemy-placeholderSpawnPoint";
 	public const string TagDashPowerup = "DashPowerup";
 	public const string TagWallJumpPowerup = "WallJumpPowerup";
 	public const string TagBombPowerup = "BombPowerup";
+	public const string TagHeart = "Heart";
+	public const string TagEnemy = "Enemy";     // Consider using a layer instead
 
 	// Layers
+	public const string LayerPlayer = "Player";
+	public const string LayerGround = "Ground";
 	public const string LayerInteractibleObject = "InteractibleObject";
+	public const string LayerFunctionalEnemy = "FunctionalEnemy";
 
 	// Animator parameters
 	public const string AnimatorPlayerAttack = "Attack";

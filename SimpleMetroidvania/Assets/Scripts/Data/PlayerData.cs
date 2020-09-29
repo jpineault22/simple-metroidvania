@@ -9,8 +9,9 @@ public class PlayerData
     public bool HasBomb { get; set; }
     public int CurrentHP { get; set; }
     public int MaxHP { get; set; }
+    public int AttackDamage { get; set; }
 
-    public PlayerData(float pSaveSpotPositionX, float pSaveSpotPositionY, int pSaveSpotMapNumber, bool pHasDash, bool pHasWallJump, bool pHasBomb, int pCurrentHP, int pMaxHP)
+    public PlayerData(float pSaveSpotPositionX, float pSaveSpotPositionY, int pSaveSpotMapNumber, bool pHasDash, bool pHasWallJump, bool pHasBomb, int pCurrentHP, int pMaxHP, int pAttackDamage)
 	{
         SaveSpotPositionX = pSaveSpotPositionX;
         SaveSpotPositionY = pSaveSpotPositionY;
@@ -20,5 +21,6 @@ public class PlayerData
         HasBomb = pHasBomb;
         CurrentHP = pCurrentHP;
         MaxHP = pMaxHP;
+        AttackDamage = pAttackDamage;
 	}
 }
