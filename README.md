@@ -16,11 +16,10 @@ Repository for a currently unnamed 2D metroidvania game.
 *Note: Controller not fully supported (especially in menus/UI)*
 
 ### Known bugs
+- Not always loading the correct Player HP
 - When standing on a unit-wide ground, the player is too large and both ground checks do not detect the ground, making it impossible to jump. (When I start creating real maps, the ground will likely always be at least as wide as the player, so this shouldn't matter. If I decide otherwise, I will have to fix this.)
 
 ### Next things to implement
-- Enemies
-- Player health system
 - Keybindings + full controller support (UI)
 - Sound integration with Wwise
 - Various gameplay objects/elements
