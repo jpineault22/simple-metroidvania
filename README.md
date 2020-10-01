@@ -1,5 +1,6 @@
 # simple-metroidvania
 Repository for the Unity project of a currently unnamed 2D Metroidvania game.
+Unity version: 2019.4.8f1
 
 ### Controls
 |  | Controller | Keyboard |
