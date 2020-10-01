@@ -1,5 +1,5 @@
 # simple-metroidvania
-Repository for a currently unnamed 2D metroidvania game.
+Repository for the Unity project of a currently unnamed 2D Metroidvania game.
 
 ### Controls
 |  | Controller | Keyboard |
