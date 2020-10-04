@@ -3,7 +3,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.Audio;
 
-public class SettingsMenu : MonoBehaviour
+public class SettingsMenu : Singleton<SettingsMenu>
 {
 	[SerializeField] private TMP_Dropdown resolutionDropDown = default;
 	[SerializeField] private AudioMixer mainMixer = default;

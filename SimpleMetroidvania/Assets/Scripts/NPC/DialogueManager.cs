@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class DialogueManager : Singleton<DialogueManager>
 {
     [SerializeField] private TMP_Text nameText = default;
     [SerializeField] private TMP_Text dialogueText = default;
+    [SerializeField] private GameObject dialogueFirstButton = default;
     [SerializeField] private Animator animator = default;
     
     private Queue<string> sentences;
@@ -27,6 +29,9 @@ public class DialogueManager : Singleton<DialogueManager>
         GameManager.Instance.StartDialogueState();
         dialogueActive = true;
         animator.SetBool(Constants.AnimatorDialogueIsOpen, true);
+
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(dialogueFirstButton);
 
         nameText.text = pNpcName;
         sentences.Clear();

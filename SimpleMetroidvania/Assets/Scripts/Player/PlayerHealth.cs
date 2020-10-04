@@ -55,7 +55,7 @@ public class PlayerHealth : Singleton<PlayerHealth>
 
 	private void Die()
 	{
-		//Debug.Log("PLAYER DIES.");
+		Debug.Log("PLAYER DIES.");
 	}
 
     private void UpdateHearts()
