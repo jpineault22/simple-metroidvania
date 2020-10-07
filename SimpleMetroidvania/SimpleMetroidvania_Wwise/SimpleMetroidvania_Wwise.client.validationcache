@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ValidationCache Version="1" SchemaVersion="97">
+	<ValidationCacheItem File="C:\Users\client\Documents\GitHub\simple-metroidvania\SimpleMetroidvania\SimpleMetroidvania_Wwise\Virtual Acoustics\Default Work Unit.wwu" DateLow="1602007066" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\client\Documents\GitHub\simple-metroidvania\SimpleMetroidvania\SimpleMetroidvania_Wwise\Triggers\Default Work Unit.wwu" DateLow="1602007066" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\client\Documents\GitHub\simple-metroidvania\SimpleMetroidvania\SimpleMetroidvania_Wwise\Switches\Default Work Unit.wwu" DateLow="1602007065" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\client\Documents\GitHub\simple-metroidvania\SimpleMetroidvania\SimpleMetroidvania_Wwise\States\Default Work Unit.wwu" DateLow="1602007066" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\client\Documents\GitHub\simple-metroidvania\SimpleMetroidvania\SimpleMetroidvania_Wwise\Soundcaster Sessions\Default Work Unit.wwu" DateLow="1602007065" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\client\Documents\GitHub\simple-metroidvania\SimpleMetroidvania\SimpleMetroidvania_Wwise\SoundBanks\Default Work Unit.wwu" DateLow="1602007065" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\client\Documents\GitHub\simple-metroidvania\SimpleMetroidvania\SimpleMetroidvania_Wwise\SimpleMetroidvania_Wwise.wproj" DateLow="1602007065" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\client\Documents\GitHub\simple-metroidvania\SimpleMetroidvania\SimpleMetroidvania_Wwise\SimpleMetroidvania_Wwise.client.wsettings" DateLow="1602007086" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\client\Documents\GitHub\simple-metroidvania\SimpleMetroidvania\SimpleMetroidvania_Wwise\Queries\Factory Queries.wwu" DateLow="1602007066" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\client\Documents\GitHub\simple-metroidvania\SimpleMetroidvania\SimpleMetroidvania_Wwise\Queries\Default Work Unit.wwu" DateLow="1602007066" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\client\Documents\GitHub\simple-metroidvania\SimpleMetroidvania\SimpleMetroidvania_Wwise\Presets\Factory Spatial Audio.wwu" DateLow="1602007065" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\client\Documents\GitHub\simple-metroidvania\SimpleMetroidvania\SimpleMetroidvania_Wwise\Presets\Default Work Unit.wwu" DateLow="1602007065" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\client\Documents\GitHub\simple-metroidvania\SimpleMetroidvania\SimpleMetroidvania_Wwise\Modulators\Default Work Unit.wwu" DateLow="1602007066" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\client\Documents\GitHub\simple-metroidvania\SimpleMetroidvania\SimpleMetroidvania_Wwise\Mixing Sessions\Default Work Unit.wwu" DateLow="1602007066" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\client\Documents\GitHub\simple-metroidvania\SimpleMetroidvania\SimpleMetroidvania_Wwise\Master-Mixer Hierarchy\Default Work Unit.wwu" DateLow="1602007066" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\client\Documents\GitHub\simple-metroidvania\SimpleMetroidvania\SimpleMetroidvania_Wwise\Interactive Music Hierarchy\Default Work Unit.wwu" DateLow="1602007066" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\client\Documents\GitHub\simple-metroidvania\SimpleMetroidvania\SimpleMetroidvania_Wwise\Game Parameters\Default Work Unit.wwu" DateLow="1602007065" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\client\Documents\GitHub\simple-metroidvania\SimpleMetroidvania\SimpleMetroidvania_Wwise\Events\Default Work Unit.wwu" DateLow="1602007066" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\client\Documents\GitHub\simple-metroidvania\SimpleMetroidvania\SimpleMetroidvania_Wwise\Effects\Factory Effects.wwu" DateLow="1602007066" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\client\Documents\GitHub\simple-metroidvania\SimpleMetroidvania\SimpleMetroidvania_Wwise\Effects\Default Work Unit.wwu" DateLow="1602007065" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\client\Documents\GitHub\simple-metroidvania\SimpleMetroidvania\SimpleMetroidvania_Wwise\Dynamic Dialogue\Default Work Unit.wwu" DateLow="1602007066" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\client\Documents\GitHub\simple-metroidvania\SimpleMetroidvania\SimpleMetroidvania_Wwise\Conversion Settings\Factory Conversion Settings.wwu" DateLow="1602007065" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\client\Documents\GitHub\simple-metroidvania\SimpleMetroidvania\SimpleMetroidvania_Wwise\Conversion Settings\Default Work Unit.wwu" DateLow="1602007065" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\client\Documents\GitHub\simple-metroidvania\SimpleMetroidvania\SimpleMetroidvania_Wwise\Control Surface Sessions\Default Work Unit.wwu" DateLow="1602007066" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\client\Documents\GitHub\simple-metroidvania\SimpleMetroidvania\SimpleMetroidvania_Wwise\Audio Devices\Default Work Unit.wwu" DateLow="1602007066" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\client\Documents\GitHub\simple-metroidvania\SimpleMetroidvania\SimpleMetroidvania_Wwise\Attenuations\Default Work Unit.wwu" DateLow="1602007066" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\client\Documents\GitHub\simple-metroidvania\SimpleMetroidvania\SimpleMetroidvania_Wwise\Actor-Mixer Hierarchy\Default Work Unit.wwu" DateLow="1602007066" DateHigh="0"/>
+</ValidationCache>

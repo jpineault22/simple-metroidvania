@@ -164,6 +164,8 @@ GameObject:
   - component: {fileID: 7327605479759152408}
   - component: {fileID: 7327605479759152407}
   - component: {fileID: 7327605479759152406}
+  - component: {fileID: 6166705676605413208}
+  - component: {fileID: -3874688992900349265}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -359,6 +361,54 @@ MonoBehaviour:
   hitForce: {x: 15, y: 10}
   knockbackTime: 0.3
   damageBoostTime: 2
+  audioStepTime: 0.18
+--- !u!114 &6166705676605413208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7327605479759152413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14e6859cc682b42439c750cbda928882, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerList: f7e1664c
+  useOtherObject: 0
+  data:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 3c254df5c0adf914d9cff5e01e1a3a61,
+      type: 2}
+  decodeBank: 0
+  loadAsynchronous: 0
+  saveDecodedBank: 0
+  unloadTriggerList: 958ca0ea
+  bankNameInternal: 
+  valueGuidInternal: 
+--- !u!114 &-3874688992900349265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7327605479759152413}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5dc7c8c1480a444586b484f3d81c92e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_listeners:
+    initialListenerList: []
+    useDefaultListeners: 1
+  isEnvironmentAware: 1
+  isStaticObject: 0
+  m_positionOffsetData:
+    KeepMe: 0
+    positionOffset: {x: 0, y: 0, z: 0}
+  m_posOffsetData: {fileID: 0}
+  listenerMask: 1
 --- !u!1 &7327605479854605848
 GameObject:
   m_ObjectHideFlags: 0

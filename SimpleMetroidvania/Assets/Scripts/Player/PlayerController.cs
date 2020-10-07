@@ -87,6 +87,9 @@ public class PlayerController : Singleton<PlayerController>
     [SerializeField] private float knockbackTime = 0.3f;                        // Duration of the knockback (Hit state, player does not have control)
     [SerializeField] private float damageBoostTime = 2f;                        // Duration of the Hit state (Other states, player has control)
 
+    [Header("Audio settings")]
+    [SerializeField] private float audioStepTime = 0.18f;
+
     #endregion
 
     #region State variables
@@ -129,6 +132,9 @@ public class PlayerController : Singleton<PlayerController>
     private float hitCounter;
     private int hitDirection;
     private bool damageBoosting;
+
+    // Audio
+    private float audioStepCounter;
 
 	#endregion
 
@@ -253,6 +259,8 @@ public class PlayerController : Singleton<PlayerController>
                     rb.velocity = new Vector2(rb.velocity.x, minVerticalVelocity);
                 }
             }
+
+            audioStepCounter -= Time.fixedDeltaTime;
         }
 	}
 
@@ -433,6 +441,13 @@ public class PlayerController : Singleton<PlayerController>
                 if (isGrounded && CurrentCharacterState != CharacterState.Jumping)
                 {
                     CurrentCharacterState = CharacterState.Walking;
+
+                    // Playing player footstep audio
+                    if (audioStepCounter <= 0)
+					{
+                        audioStepCounter = audioStepTime;
+                        AkSoundEngine.PostEvent("PlayerFootstep", gameObject);
+                    }
                 }
             }
             else

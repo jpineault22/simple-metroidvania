@@ -1,0 +1,9 @@
+Event	ID	Name			Wwise Object Path	Notes
+	4209595310	SaveSpot			\Default Work Unit\SaveSpot	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	155120941	Save_Spot_Drone_03	C:\Users\client\Documents\GitHub\simple-metroidvania\SimpleMetroidvania\SimpleMetroidvania_Wwise\.cache\Windows\SFX\42761__decembered__lucid-drone_025F75DE.wem		\Actor-Mixer Hierarchy\Default Work Unit\SaveSpot\Save_Spot_Drone_03		9735308
+	304495487	Save_Spot_Drone	C:\Users\client\Documents\GitHub\simple-metroidvania\SimpleMetroidvania\SimpleMetroidvania_Wwise\.cache\Windows\SFX\42761__decembered__lucid-drone_D79FB2B7.wem		\Actor-Mixer Hierarchy\Default Work Unit\SaveSpot\Save_Spot_Drone		21372516
+	958127977	Save_Spot_Drone_01	C:\Users\client\Documents\GitHub\simple-metroidvania\SimpleMetroidvania\SimpleMetroidvania_Wwise\.cache\Windows\SFX\42761__decembered__lucid-drone_B5669D1F.wem		\Actor-Mixer Hierarchy\Default Work Unit\SaveSpot\Save_Spot_Drone_01		10397472
+	1067477556	Save_Spot_Drone_02	C:\Users\client\Documents\GitHub\simple-metroidvania\SimpleMetroidvania\SimpleMetroidvania_Wwise\.cache\Windows\SFX\42761__decembered__lucid-drone_BA824D80.wem		\Actor-Mixer Hierarchy\Default Work Unit\SaveSpot\Save_Spot_Drone_02		12327616
+

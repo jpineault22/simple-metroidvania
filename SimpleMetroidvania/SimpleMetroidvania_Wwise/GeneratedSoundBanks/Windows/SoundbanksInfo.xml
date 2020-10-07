@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SoundBanksInfo Platform="Windows" BasePlatform="Windows" SchemaVersion="12" SoundbankVersion="135">
+	<RootPaths>
+		<ProjectRoot>C:\Users\client\Documents\GitHub\simple-metroidvania\SimpleMetroidvania\SimpleMetroidvania_Wwise\</ProjectRoot>
+		<SourceFilesRoot>C:\Users\client\Documents\GitHub\simple-metroidvania\SimpleMetroidvania\SimpleMetroidvania_Wwise\.cache\Windows\</SourceFilesRoot>
+		<SoundBanksRoot>C:\Users\client\Documents\GitHub\simple-metroidvania\SimpleMetroidvania\SimpleMetroidvania_Wwise\GeneratedSoundBanks\Windows\</SoundBanksRoot>
+		<ExternalSourcesInputFile></ExternalSourcesInputFile>
+		<ExternalSourcesOutputRoot>C:\Users\client\Documents\GitHub\simple-metroidvania\SimpleMetroidvania\SimpleMetroidvania_Wwise\GeneratedSoundBanks\Windows</ExternalSourcesOutputRoot>
+	</RootPaths>
+	<DialogueEvents/>
+	<StreamedFiles/>
+	<MediaFilesNotInAnyBank/>
+	<SoundBanks>
+		<SoundBank Id="77978275" Language="SFX" Hash="2113493921">
+			<ObjectPath>\SoundBanks\Default Work Unit\Ambient</ObjectPath>
+			<ShortName>Ambient</ShortName>
+			<Path>Ambient.bnk</Path>
+			<IncludedEvents>
+				<Event Id="4209595310" Name="SaveSpot" ObjectPath="\Events\Default Work Unit\SaveSpot" MaxAttenuation="50.000000" DurationType="Infinite">
+					<IncludedMemoryFiles>
+						<File Id="155120941" Language="SFX">
+							<ShortName>42761__decembered__lucid-drone.wav</ShortName>
+							<Path>SFX\42761__decembered__lucid-drone_025F75DE.wem</Path>
+						</File>
+						<File Id="304495487" Language="SFX">
+							<ShortName>42761__decembered__lucid-drone.wav</ShortName>
+							<Path>SFX\42761__decembered__lucid-drone_D79FB2B7.wem</Path>
+						</File>
+						<File Id="958127977" Language="SFX">
+							<ShortName>42761__decembered__lucid-drone.wav</ShortName>
+							<Path>SFX\42761__decembered__lucid-drone_B5669D1F.wem</Path>
+						</File>
+						<File Id="1067477556" Language="SFX">
+							<ShortName>42761__decembered__lucid-drone.wav</ShortName>
+							<Path>SFX\42761__decembered__lucid-drone_BA824D80.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+			</IncludedEvents>
+		</SoundBank>
+		<SoundBank Id="1069431850" Language="SFX" Hash="2273485929">
+			<ObjectPath>\SoundBanks\Default Work Unit\Player</ObjectPath>
+			<ShortName>Player</ShortName>
+			<Path>Player.bnk</Path>
+			<IncludedEvents>
+				<Event Id="3542290436" Name="PlayerFootstep" ObjectPath="\Events\Default Work Unit\PlayerFootstep" DurationType="OneShot" DurationMin="0.250473" DurationMax="0.414380">
+					<IncludedMemoryFiles>
+						<File Id="36000391" Language="SFX">
+							<ShortName>Footstep_Walking_Concrete_01.wav</ShortName>
+							<Path>SFX\Footstep_Walking_Concrete_01_10C4C929.wem</Path>
+						</File>
+						<File Id="243054947" Language="SFX">
+							<ShortName>Footstep_Walking_Concrete_03.wav</ShortName>
+							<Path>SFX\Footstep_Walking_Concrete_03_10C4C929.wem</Path>
+						</File>
+						<File Id="725425353" Language="SFX">
+							<ShortName>Footstep_Walking_Concrete_04.wav</ShortName>
+							<Path>SFX\Footstep_Walking_Concrete_04_10C4C929.wem</Path>
+						</File>
+						<File Id="788120509" Language="SFX">
+							<ShortName>Footstep_Walking_Concrete_02.wav</ShortName>
+							<Path>SFX\Footstep_Walking_Concrete_02_10C4C929.wem</Path>
+						</File>
+						<File Id="1001628775" Language="SFX">
+							<ShortName>Footstep_Walking_Concrete_06.wav</ShortName>
+							<Path>SFX\Footstep_Walking_Concrete_06_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+			</IncludedEvents>
+		</SoundBank>
+		<SoundBank Id="1355168291" Language="SFX" Hash="1666655909">
+			<ObjectPath>Init</ObjectPath>
+			<ShortName>Init</ShortName>
+			<Path>Init.bnk</Path>
+			<IncludedAuxBusses>
+				<AuxBus Id="348963605" Name="Reverb" ObjectPath="\Master-Mixer Hierarchy\Default Work Unit\Master Audio Bus\Reverb"/>
+			</IncludedAuxBusses>
+		</SoundBank>
+	</SoundBanks>
+</SoundBanksInfo>
