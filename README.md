@@ -1,6 +1,6 @@
 # simple-metroidvania
-Repository for the Unity project of a currently unnamed 2D Metroidvania game.
-Unity version: 2019.4.8f1
+Repository for the Unity project of a currently unnamed 2D Metroidvania game.  
+Unity version: 2019.4.8f1  
 Wwise version: 2019.2.6
 
 *Note: Menu/UI layouts currently built only for full screen*
