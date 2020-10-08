@@ -18,7 +18,6 @@ Wwise version: 2019.2.6
 \*Collect powerup item to acquire ability
 
 ### Known bugs
-- Not always loading the correct Player HP
 - The SaveSpot Wwise event plays correctly on its first load, then when entering a map with a save spot for the second time, the sound is not spatialized/positioned correctly.
 - When standing on a unit-wide ground, the player is too large and both ground checks do not detect the ground, making it impossible to jump. (When I start creating real maps, the ground will likely always be at least as wide as the player, so this shouldn't matter. If I decide otherwise, I will have to fix this.)
 
