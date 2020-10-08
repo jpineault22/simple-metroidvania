@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 // Defines any object that can be hit with a normal attack (enemies, destructible grounds, etc.)
 public abstract class HittableObject : MonoBehaviour

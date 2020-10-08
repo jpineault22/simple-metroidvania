@@ -177,8 +177,6 @@ public class PlayerController : Singleton<PlayerController>
 	{
         LevelLoader.Instance.TransitionHalfDone += OnTransitionHalfDone;
         LevelLoader.Instance.MapTransitionEnded += OnMapTransitionEnded;
-
-        PlayerHealth.Instance.SetHUBActive(true);
     }
 
 	private void Update()
@@ -449,7 +447,7 @@ public class PlayerController : Singleton<PlayerController>
                     if (audioStepCounter <= 0)
 					{
                         audioStepCounter = audioStepTime;
-                        AkSoundEngine.PostEvent("PlayerFootstep", gameObject);
+                        AkSoundEngine.PostEvent(Constants.WwiseEventPlayerFootstep, gameObject);
                     }
                 }
             }
@@ -462,11 +460,9 @@ public class PlayerController : Singleton<PlayerController>
 
 	private void ProcessJump()
 	{
-        // Check if player bunks on ceiling
-        if (Physics2D.OverlapCircle(ceilingCheckLeft.position, bunkRadius, groundLayerMask) || Physics2D.OverlapCircle(ceilingCheckRight.position, bunkRadius, groundLayerMask))
+        if (CheckIfCeilingBunk())
         {
-            rb.velocity = new Vector2(rb.velocity.x, 0);
-            CurrentCharacterState = CharacterState.Falling;
+            return;
         }
         else if (jumpTimeCounter > 0)
         {
@@ -481,7 +477,11 @@ public class PlayerController : Singleton<PlayerController>
 
     private void ProcessWallJump()
 	{
-        if (wallJumpTimeCounter > 0)
+        if (CheckIfCeilingBunk())
+        {
+            return;
+        }
+        else if (wallJumpTimeCounter > 0)
         {
             rb.velocity = new Vector2(jumpForce * horizontalSpeedMultiplier, jumpForce / wallJumpVerticalForceDivider);
             wallJumpTimeCounter -= Time.fixedDeltaTime;
@@ -682,6 +682,18 @@ public class PlayerController : Singleton<PlayerController>
 		}
 	}
 
+    private bool CheckIfCeilingBunk()
+	{
+        if (Physics2D.OverlapCircle(ceilingCheckLeft.position, bunkRadius, groundLayerMask) || Physics2D.OverlapCircle(ceilingCheckRight.position, bunkRadius, groundLayerMask))
+        {
+            rb.velocity = new Vector2(rb.velocity.x, 0);
+            CurrentCharacterState = CharacterState.Falling;
+            return true;
+        }
+
+        return false;
+    }
+
     private Vector2 CreateDashVector()
 	{
         Vector2 dashVector = Vector2.zero;
@@ -880,11 +892,6 @@ public class PlayerController : Singleton<PlayerController>
 
 	protected override void OnDestroy()
 	{
-        if (PlayerHealth.IsInitialized)
-		{
-            PlayerHealth.Instance.SetHUBActive(false);
-        }
-        
         if (LevelLoader.IsInitialized)
 		{
             LevelLoader.Instance.TransitionHalfDone -= OnTransitionHalfDone;

@@ -1,5 +1,4 @@
-﻿using JetBrains.Annotations;
-using UnityEngine;
+﻿using UnityEngine;
 
 // Refine to make behavior more fluid (ex: reaction time)
 // See if it would be better to add another superclass for enemy types that would have a different overall behavior (Ground, Air, etc.)
@@ -40,9 +39,10 @@ public class EnemyPlaceholder : Enemy
 
 	#endregion
 
-	#region Components
+	#region GameObjects/Components
 
 	private Transform player;
+
 	private Rigidbody2D rb;
 
 	#endregion
@@ -67,7 +67,6 @@ public class EnemyPlaceholder : Enemy
 
 	private void Start()
 	{
-		// Change all Player game object getters for this for efficiency and consistency?
 		player = PlayerController.Instance.gameObject.transform;
 
 		if (Random.Range(0f, 1f) <= walkUponStartChance)
@@ -82,6 +81,13 @@ public class EnemyPlaceholder : Enemy
 
 	private void Update()
 	{
+		// If the player has been destroyed, become idle while waiting to be destroyed
+		if (player == null)
+		{
+			BecomeIdle();
+			return;
+		}
+		
 		// Basic states (Walking, Idle)
 		if (currentEnemyState == EnemyState.Walking || currentEnemyState == EnemyState.Idle)
 		{

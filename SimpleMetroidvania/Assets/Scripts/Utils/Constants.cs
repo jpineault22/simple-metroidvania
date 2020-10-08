@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 
-// Split this class into enums when possible (maybe tags, animation parameters)
 public static class Constants
 {
 	public const int StartingMapNumber = 1;
@@ -27,7 +26,7 @@ public static class Constants
 	public const string TagWallJumpPowerup = "WallJumpPowerup";
 	public const string TagBombPowerup = "BombPowerup";
 	public const string TagHeart = "Heart";
-	public const string TagEnemy = "Enemy";     // Consider using a layer instead
+	public const string TagEnemy = "Enemy";
 
 	// Layers
 	public const string LayerPlayer = "Player";
@@ -45,6 +44,9 @@ public static class Constants
 
 	// Audio mixer parameters
 	public const string AudioMasterVolume = "MasterVolume";
+
+	// Wwise
+	public const string WwiseEventPlayerFootstep = "PlayerFootstep";
 
 	// These variables determine the angle thresholds (in radians) for the dash direction to change (2/16 of a full circle for each direction). They correspond to:
 	public const float AngleConstantFirst = Mathf.PI / 8;           // A quarter of the first quadrant

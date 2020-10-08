@@ -10747,6 +10747,11 @@ PrefabInstance:
       propertyPath: targetSceneNumber
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3659015835500126689, guid: 185e56ffb7ec9e2449078d9051c9e3d8,
+        type: 3}
+      propertyPath: mapTransitionDirection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3659015835500126690, guid: 185e56ffb7ec9e2449078d9051c9e3d8,
         type: 3}
       propertyPath: m_Name
@@ -11333,6 +11338,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: MapExit_4
       objectReference: {fileID: 0}
+    - target: {fileID: 6404857694372281490, guid: 563b9f90eb271e14f801988a874ceeae,
+        type: 3}
+      propertyPath: mapTransitionDirection
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6404857694372281491, guid: 563b9f90eb271e14f801988a874ceeae,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11468,6 +11478,11 @@ PrefabInstance:
         type: 3}
       propertyPath: targetSceneNumber
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3659015835500126689, guid: 185e56ffb7ec9e2449078d9051c9e3d8,
+        type: 3}
+      propertyPath: mapTransitionDirection
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3659015835500126690, guid: 185e56ffb7ec9e2449078d9051c9e3d8,
         type: 3}

@@ -1535,7 +1535,7 @@ GameObject:
   - component: {fileID: 1458846116}
   - component: {fileID: 1458846115}
   - component: {fileID: 1458846114}
-  - component: {fileID: 1458846117}
+  - component: {fileID: 1458846118}
   m_Layer: 0
   m_Name: HealthCanvas
   m_TagString: Untagged
@@ -1623,7 +1623,7 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
---- !u!114 &1458846117
+--- !u!114 &1458846118
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1632,10 +1632,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1458846112}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24864b98395d9e94487888e3df3107a8, type: 3}
+  m_Script: {fileID: 11500000, guid: 4d8a46eae64688c4bb4cc43d00a0237e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseHP: 3
   healthPanel: {fileID: 1307948044}
   fullHeartSprite: {fileID: 21300000, guid: 6441f856398900e449c1086ab6c25266, type: 3}
   emptyHeartSprite: {fileID: 21300000, guid: 1d2608f31d0d518409b89b61589f7569, type: 3}

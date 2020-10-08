@@ -35,7 +35,6 @@ public class MapExit : MonoBehaviour
 	}
 }
 
-// Could merge with the Direction enum in PlayerController.cs
 public enum MapTransitionDirection
 {
 	Up,
