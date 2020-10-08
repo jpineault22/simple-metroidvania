@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public abstract class Enemy : MonoBehaviour
+public abstract class Enemy : HittableObject
 {
     [SerializeField] public EnemyData enemyData = default;
 
@@ -23,8 +23,6 @@ public abstract class Enemy : MonoBehaviour
     protected abstract void Die();
 
     protected abstract void Flip();
-
-    public abstract void GetHit(Direction pAttackDirection, int pDamage);
 
     protected void TakeDamage(int pDamage)
 	{

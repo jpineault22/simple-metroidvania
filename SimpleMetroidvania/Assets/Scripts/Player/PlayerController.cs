@@ -34,7 +34,7 @@ public class PlayerController : Singleton<PlayerController>
     [SerializeField] private Transform attackPointLeft = default;
     [SerializeField] private Transform attackPointUp = default;
     [SerializeField] private Transform attackPointDown = default;
-    [SerializeField] private LayerMask enemyLayerMask = default;
+    [SerializeField] private LayerMask hittableObjectsLayerMask = default;
     [SerializeField] private GameObject bombPrefab = default;
 
     // Reference to the interactible game object in range
@@ -336,17 +336,20 @@ public class PlayerController : Singleton<PlayerController>
                     attackPoint = attackPointDown.position;
                 }
 
-                Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint, attackRange, enemyLayerMask);
+                Collider2D[] hitObjects = Physics2D.OverlapCircleAll(attackPoint, attackRange, hittableObjectsLayerMask);
 
-                if (hitEnemies.Length != 0)
+                if (hitObjects.Length != 0)
                 {
                     recoilTimeCounter = recoilTime;
                 }
 
-                foreach (Collider2D enemyCollider in hitEnemies)
+                foreach (Collider2D collider in hitObjects)
                 {
-                    Enemy enemy = enemyCollider.gameObject.GetComponentInParent<Enemy>();
-                    enemy.GetHit(attackDirection, AttackDamage);
+                    HittableObject hittableObject = collider.gameObject.CompareTag(Constants.TagEnemy)
+                        ? collider.gameObject.GetComponentInParent<Enemy>()
+                        : collider.gameObject.GetComponent<HittableObject>();
+                    
+                    hittableObject.GetHit(attackDirection, AttackDamage);
                 }
             }
         }

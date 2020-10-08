@@ -21,6 +21,7 @@ TagManager:
   - Enemy
   - HeartSpawnPoint
   - Enemy-placeholderSpawnPoint
+  - GroundDestructible
   layers:
   - Default
   - TransparentFX
@@ -37,7 +38,7 @@ TagManager:
   - BombableGround
   - InteractibleObject
   - FunctionalEnemy
-  - 
+  - HittableObject
   - 
   - 
   - 
