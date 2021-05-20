@@ -19,6 +19,7 @@ Wwise version: 2019.2.6
 
 ### Interested in the code behind?
 [This is where the code begins when you launch the game.](/SimpleMetroidvania/Assets/Scripts/GameManagement/GameManager.cs)
+
 [And this has most of the logic behind the player character.](/SimpleMetroidvania/Assets/Scripts/Player/PlayerController.cs)
 
 ### Known bugs
