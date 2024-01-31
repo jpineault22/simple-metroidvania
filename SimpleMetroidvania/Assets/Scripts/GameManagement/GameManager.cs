@@ -41,7 +41,7 @@ public class GameManager : Singleton<GameManager>
 			PlayerController.Instance.HasBomb,
 			PlayerHealth.Instance.CurrentHP,
 			PlayerHealth.Instance.MaxHP,
-			PlayerController.Instance.AttackDamage);
+			AttackManager.Instance.AttackDamage);
 
 		SaveSystem.SavePlayerData(data);
 	}
@@ -65,7 +65,7 @@ public class GameManager : Singleton<GameManager>
 			PlayerController.Instance.HasWallJump = data.HasWallJump;
 			PlayerController.Instance.HasBomb = data.HasBomb;
 			PlayerHealth.Instance.LoadHP(data.CurrentHP, data.MaxHP);
-			PlayerController.Instance.AttackDamage = data.AttackDamage;
+			AttackManager.Instance.AttackDamage = data.AttackDamage;
 		}
 	}
 
@@ -81,6 +81,7 @@ public class GameManager : Singleton<GameManager>
 		InstantiatePlayer();
 		LevelLoader.Instance.LoadFirstMap(Constants.NamePrefixSceneMap + pSaveSpotMapNumber);
 		LevelLoader.Instance.UnloadScene(Constants.NameSceneStartMenu);
+		InputManager.Instance.EnableGameplayMap();
 	}
 
 	public void LoadMap(MapExit pMapExit)
@@ -110,11 +111,14 @@ public class GameManager : Singleton<GameManager>
 	
 	public void QuitGame()
 	{
-	#if UNITY_EDITOR
-		UnityEditor.EditorApplication.isPlaying = false;
-	#else
-		Application.Quit();
-	#endif
+		// Implement quit transition
+		DestroyPlayer();
+
+		#if UNITY_EDITOR
+			UnityEditor.EditorApplication.isPlaying = false;
+		#else
+			Application.Quit();
+		#endif
 	}
 
 	private void LoadMenu()

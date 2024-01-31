@@ -34,6 +34,12 @@ public static class Constants
 	public const string LayerInteractibleObject = "InteractibleObject";
 	public const string LayerFunctionalEnemy = "FunctionalEnemy";
 
+	// Input
+	public const string InputActionMapGameplay = "Gameplay";
+	public const string InputActionMapUI = "UI";
+	public const string InputControlSchemeGamepad = "Gamepad";
+	public const string InputControlSchemeKeyboardMouse = "KeyboardMouse";
+
 	// Animator parameters
 	public const string AnimatorPlayerAttack = "Attack";
 	public const string AnimatorPlayerAttackUp = "AttackUp";
@@ -44,9 +50,6 @@ public static class Constants
 
 	// Audio mixer parameters
 	public const string AudioMasterVolume = "MasterVolume";
-
-	// Wwise
-	public const string WwiseEventPlayerFootstep = "PlayerFootstep";
 
 	// These variables determine the angle thresholds (in radians) for the dash direction to change (2/16 of a full circle for each direction). They correspond to:
 	public const float AngleConstantFirst = Mathf.PI / 8;           // A quarter of the first quadrant

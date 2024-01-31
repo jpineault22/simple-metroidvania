@@ -2,24 +2,11 @@
 
 public class UIManager : Singleton<UIManager>
 {
-	private UIControls controls;
-
-	protected override void Awake()
+	private void Start()
 	{
-        controls = new UIControls();
-        controls.InGameUI.Pause.performed += ctx => PauseButtonPressed();
-        controls.InGameUI.Back.performed += ctx => BackButtonPressed();
+        InputManager.Instance.Paused += PauseButtonPressed;
+		InputManager.Instance.Backed += BackButtonPressed;
     }
-
-	private void OnEnable()
-	{
-		controls.Enable();
-	}
-
-	private void OnDisable()
-	{
-		controls.Disable();
-	}
 
 	private void PauseButtonPressed()
 	{

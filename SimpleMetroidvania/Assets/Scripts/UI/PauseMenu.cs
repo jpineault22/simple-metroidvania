@@ -8,14 +8,20 @@ public class PauseMenu : Singleton<PauseMenu>
 
 	public void Pause()
 	{
-		pauseMenuPanel.SetActive(true);
-		GameManager.Instance.PauseGame();
+		if (GameManager.Instance.CurrentGameState == GameState.Playing && PlayerController.Instance.CurrentCharacterState != CharacterState.Dying)
+		{
+			pauseMenuPanel.SetActive(true);
+			GameManager.Instance.PauseGame();
+		}
 	}
 
 	public void Resume()
 	{
-		pauseMenuPanel.SetActive(false);
-		GameManager.Instance.UnpauseGame();
+		if (GameManager.Instance.CurrentGameState == GameState.Paused)
+		{
+			pauseMenuPanel.SetActive(false);
+			GameManager.Instance.UnpauseGame();
+		}
 	}
 
 	public void LoadMenu()
