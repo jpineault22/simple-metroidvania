@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{AC3A7E57-AA5D-4AEF-B039-8060DAE023AC}" SchemaVersion="97">
+	<AudioObjects>
+		<WorkUnit Name="Default Work Unit" ID="{AC3A7E57-AA5D-4AEF-B039-8060DAE023AC}" PersistMode="Standalone">
+			<ChildrenList>
+				<RandomSequenceContainer Name="FootstepWalkingConcrete" ID="{34B0F972-370D-479D-935F-C87F4F840BE5}" ShortID="740201178">
+					<PropertyList>
+						<Property Name="MaxSoundPerInstance" Type="int16">
+							<ValueList>
+								<Value>2</Value>
+							</ValueList>
+						</Property>
+						<Property Name="Pitch" Type="int32">
+							<ModifierList>
+								<ModifierInfo>
+									<Modifier Name="" ID="{A2C8089F-F4D7-41FB-8F0C-8EC6E06746DC}">
+										<PropertyList>
+											<Property Name="Enabled" Type="bool" Value="True"/>
+											<Property Name="Max" Type="Real64" Value="50"/>
+											<Property Name="Min" Type="Real64" Value="-50"/>
+										</PropertyList>
+									</Modifier>
+								</ModifierInfo>
+							</ModifierList>
+						</Property>
+						<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+						<Property Name="UseMaxSoundPerInstance" Type="bool">
+							<ValueList>
+								<Value>True</Value>
+							</ValueList>
+						</Property>
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C956A2FB-0903-4F1C-8752-666FED831A49}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5DC3E85F-F77D-439B-9BC2-5FF0B9CF21B5}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<Sound Name="Footstep_Walking_Concrete_02" ID="{104C5D5A-A11D-4EA4-9FAE-AF396DF8FDDF}" ShortID="57106250">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C956A2FB-0903-4F1C-8752-666FED831A49}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5DC3E85F-F77D-439B-9BC2-5FF0B9CF21B5}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="Footstep_Walking_Concrete_02" ID="{1CF6F0B3-6DBF-482F-9D46-1CD6FED6C156}">
+									<Language>SFX</Language>
+									<AudioFile>Footstep_Walking_Concrete_02.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="788120509"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="Footstep_Walking_Concrete_02" ID="{1CF6F0B3-6DBF-482F-9D46-1CD6FED6C156}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="Footstep_Walking_Concrete_03" ID="{A7F23C7C-9494-4DA8-97B8-563C20CCD8D4}" ShortID="916688406">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C956A2FB-0903-4F1C-8752-666FED831A49}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5DC3E85F-F77D-439B-9BC2-5FF0B9CF21B5}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="Footstep_Walking_Concrete_03" ID="{8570DE86-18E5-48C5-B43A-7B7C29B18C69}">
+									<Language>SFX</Language>
+									<AudioFile>Footstep_Walking_Concrete_03.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="243054947"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="Footstep_Walking_Concrete_03" ID="{8570DE86-18E5-48C5-B43A-7B7C29B18C69}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="Footstep_Walking_Concrete_01" ID="{5296F61B-CFC6-4F5B-82F8-3F0115F3184E}" ShortID="898880015">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C956A2FB-0903-4F1C-8752-666FED831A49}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5DC3E85F-F77D-439B-9BC2-5FF0B9CF21B5}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="Footstep_Walking_Concrete_01" ID="{205F3C8F-3F14-4CAB-AE4B-0CA76E18A747}">
+									<Language>SFX</Language>
+									<AudioFile>Footstep_Walking_Concrete_01.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="36000391"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="Footstep_Walking_Concrete_01" ID="{205F3C8F-3F14-4CAB-AE4B-0CA76E18A747}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="Footstep_Walking_Concrete_06" ID="{7EE97448-BBDA-4B5C-8845-A00F7496C2DC}" ShortID="545012752">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C956A2FB-0903-4F1C-8752-666FED831A49}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5DC3E85F-F77D-439B-9BC2-5FF0B9CF21B5}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="Footstep_Walking_Concrete_06" ID="{66F93869-838D-464F-8A51-247D95021A3B}">
+									<Language>SFX</Language>
+									<AudioFile>Footstep_Walking_Concrete_06.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="1001628775"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="Footstep_Walking_Concrete_06" ID="{66F93869-838D-464F-8A51-247D95021A3B}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="Footstep_Walking_Concrete_04" ID="{D23AD56A-3235-426D-A03A-C95E5C941E74}" ShortID="785735156">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C956A2FB-0903-4F1C-8752-666FED831A49}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5DC3E85F-F77D-439B-9BC2-5FF0B9CF21B5}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="Footstep_Walking_Concrete_04" ID="{DBC4AF94-FA14-4DC3-864E-20C8013C8457}">
+									<Language>SFX</Language>
+									<AudioFile>Footstep_Walking_Concrete_04.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="725425353"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="Footstep_Walking_Concrete_04" ID="{DBC4AF94-FA14-4DC3-864E-20C8013C8457}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+					</ChildrenList>
+				</RandomSequenceContainer>
+				<RandomSequenceContainer Name="SaveSpot" ID="{691D2F31-1115-4FBE-A1B3-75426C4625C6}" ShortID="719081476">
+					<PropertyList>
+						<Property Name="3DSpatialization" Type="int16" Value="1"/>
+						<Property Name="RandomAvoidRepeating" Type="bool" Value="False"/>
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Attenuation">
+							<ObjectRef Name="SaveSpot" ID="{82307889-1252-49A9-B83B-6F56E79F369A}" WorkUnitID="{9D1793B5-013D-446C-B854-67668A31EF97}"/>
+						</Reference>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C956A2FB-0903-4F1C-8752-666FED831A49}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5DC3E85F-F77D-439B-9BC2-5FF0B9CF21B5}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<Sound Name="Save_Spot_Drone" ID="{52D208FE-B47B-409A-8128-7DA24D57B553}" ShortID="576564876">
+							<PropertyList>
+								<Property Name="3DSpatialization" Type="int16" Value="1"/>
+								<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Attenuation">
+									<ObjectRef Name="SaveSpot" ID="{82307889-1252-49A9-B83B-6F56E79F369A}" WorkUnitID="{9D1793B5-013D-446C-B854-67668A31EF97}"/>
+								</Reference>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C956A2FB-0903-4F1C-8752-666FED831A49}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5DC3E85F-F77D-439B-9BC2-5FF0B9CF21B5}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="42761__decembered__lucid-drone" ID="{14934EB3-781E-412E-ABC0-EBA174B28A31}">
+									<Language>SFX</Language>
+									<AudioFile>42761__decembered__lucid-drone.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="304495487"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="42761__decembered__lucid-drone" ID="{14934EB3-781E-412E-ABC0-EBA174B28A31}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="Save_Spot_Drone_01" ID="{3999503D-C7C5-4FEA-BE5C-60A405447E1A}" ShortID="904039852">
+							<PropertyList>
+								<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C956A2FB-0903-4F1C-8752-666FED831A49}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5DC3E85F-F77D-439B-9BC2-5FF0B9CF21B5}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="42761__decembered__lucid-drone" ID="{59F29267-1177-49A9-ABF6-571E2E8C3906}">
+									<PropertyList>
+										<Property Name="FadeInDuration" Type="Real64" Value="0.181135232442834"/>
+										<Property Name="FadeOutDuration" Type="Real64" Value="0.109101179004853"/>
+										<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+										<Property Name="TrimBegin" Type="Real64" Value="11.5009226050341"/>
+										<Property Name="TrimEnd" Type="Real64" Value="70.4431509558339"/>
+									</PropertyList>
+									<Language>SFX</Language>
+									<AudioFile>42761__decembered__lucid-drone.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="958127977"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="42761__decembered__lucid-drone" ID="{59F29267-1177-49A9-ABF6-571E2E8C3906}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="Save_Spot_Drone_02" ID="{4BA81192-1FC0-41C7-B004-2111F3093B4A}" ShortID="524715953">
+							<PropertyList>
+								<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C956A2FB-0903-4F1C-8752-666FED831A49}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5DC3E85F-F77D-439B-9BC2-5FF0B9CF21B5}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="42761__decembered__lucid-drone" ID="{101CC1BE-E593-470C-8DBD-A150C5828B32}">
+									<PropertyList>
+										<Property Name="FadeInDuration" Type="Real64" Value="0.159735036181029"/>
+										<Property Name="FadeOutDuration" Type="Real64" Value="0.159735036181019"/>
+										<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+										<Property Name="TrimBegin" Type="Real64" Value="34.1034302246497"/>
+										<Property Name="TrimEnd" Type="Real64" Value="103.98750855385"/>
+									</PropertyList>
+									<Language>SFX</Language>
+									<AudioFile>42761__decembered__lucid-drone.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="1067477556"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="42761__decembered__lucid-drone" ID="{101CC1BE-E593-470C-8DBD-A150C5828B32}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="Save_Spot_Drone_03" ID="{A5990506-D6E5-4F02-8E8C-2D2D232D5838}" ShortID="739483614">
+							<PropertyList>
+								<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{C956A2FB-0903-4F1C-8752-666FED831A49}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5DC3E85F-F77D-439B-9BC2-5FF0B9CF21B5}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="42761__decembered__lucid-drone" ID="{183A1CE3-A011-43EF-A1D3-20174800DF9D}">
+									<PropertyList>
+										<Property Name="FadeInDuration" Type="Real64" Value="0.159735036181033"/>
+										<Property Name="FadeOutDuration" Type="Real64" Value="0.0798675180905093"/>
+										<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+										<Property Name="TrimBegin" Type="Real64" Value="58.4630232422567"/>
+										<Property Name="TrimEnd" Type="Real64" Value="113.651478242802"/>
+									</PropertyList>
+									<Language>SFX</Language>
+									<AudioFile>42761__decembered__lucid-drone.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="155120941"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="42761__decembered__lucid-drone" ID="{183A1CE3-A011-43EF-A1D3-20174800DF9D}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+					</ChildrenList>
+				</RandomSequenceContainer>
+			</ChildrenList>
+		</WorkUnit>
+	</AudioObjects>
+</WwiseDocument>
