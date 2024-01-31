@@ -1,5 +1,5 @@
 # simple-metroidvania
-Repository for the Unity project of a 2D Metroidvania game template.
+Repository for the Unity project of a 2D Metroidvania game template.  
 Unity version: 2022.2.8
 
 *Note: Menu/UI layouts currently built only for full screen*
