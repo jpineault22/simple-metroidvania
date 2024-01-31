@@ -1,7 +1,6 @@
 # simple-metroidvania
-Repository for the Unity project of a currently unnamed 2D Metroidvania game.  
-Unity version: 2019.4.8f1  
-Wwise version: 2019.2.6
+Repository for the Unity project of a 2D Metroidvania game template.
+Unity version: 2022.2.8
 
 *Note: Menu/UI layouts currently built only for full screen*
 
@@ -23,7 +22,6 @@ Wwise version: 2019.2.6
 [And this has most of the logic behind the player character.](/SimpleMetroidvania/Assets/Scripts/Player/PlayerController.cs)
 
 ### Known bugs
-- The SaveSpot Wwise event plays correctly on its first load, then when entering a map with a save spot for the second time, the sound is not spatialized/positioned correctly.
 - When standing on a unit-wide ground, the player is too large and both ground checks do not detect the ground, making it impossible to jump. (When I start creating real maps, the ground will likely always be at least as wide as the player, so this shouldn't matter. If I decide otherwise, I will have to fix this.)
 
 ### Next things to implement
